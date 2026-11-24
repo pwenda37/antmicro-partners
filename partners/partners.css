@@ -1,0 +1,1105 @@
+/* Partnerzy: siatka logotypów + podgląd partnera.
+   Kolory pochodzą z tokenów strony (--color-*), więc działają w trybie jasnym i ciemnym. */
+
+:root {
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --tile-hover-bg: oklch(96.5% 0 0);
+  --tile-hover-fg: oklch(20% 0 0);
+}
+html:not(.dark) { --tile-hover-bg: var(--color-background-secondary); }
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.partners-hero { padding-top: 64px; padding-bottom: 72px; align-items: center; }
+@media (min-width: 768px) { .partners-hero { padding-top: 96px; padding-bottom: 96px; } }
+@media (min-width: 1024px) {
+  .partners-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding-top: 48px; padding-bottom: 48px; }
+}
+.partners-hero__lead { max-width: 60ch; }
+
+/* ---------- wariant B: zamknięte okno z animacją chipu w ditherze ----------
+   Jak okno symulacji na stronie Renode: zaokrąglone górne rogi, linie z boków i u góry,
+   pasek z kropkami, otwarte od dołu na linię sekcji. W środku tekst hero i tło z ditherem. */
+.hero-window-bar, .hero-dither { display: none; }
+
+html[data-hero="dither"] .partners-hero {
+  --win-line: color-mix(in oklab, var(--color-border) 70%, transparent);
+  display: block;
+  min-height: 600px;
+  margin-top: 48px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--win-line);
+  border-bottom: 0;
+  border-radius: 16px 16px 0 0;
+  background: color-mix(in oklab, var(--color-background) 55%, transparent);
+  box-shadow: 0 25px 50px -12px color-mix(in oklab, var(--color-background) 20%, transparent);
+}
+/* kropki w rogach siatki zostają na linii sekcji, nie na oknie */
+html[data-hero="dither"] .partners-hero > .pointer-events-none.absolute { display: none; }
+html[data-hero="dither"] .orbit { display: none; }
+
+/* pasek okna wyłączony (zostaje w kodzie, gdyby wrócił) */
+html[data-hero="dither"] .hero-window-bar.is-enabled {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--win-line);
+  background: color-mix(in oklab, var(--color-background) 80%, transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.hero-window-bar__tags { display: flex; gap: 8px; }
+.hero-window-bar__tags span {
+  padding: 4px 10px;
+  border: 1px solid color-mix(in oklab, var(--color-border) 80%, transparent);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--color-foreground);
+}
+.hero-window-bar__dots { display: flex; gap: 8px; }
+.hero-window-bar__dots i { width: 8px; height: 8px; border-radius: 999px; background: color-mix(in oklab, var(--color-foreground-muted) 60%, transparent); }
+
+html[data-hero="dither"] .partners-hero__text {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  padding: 72px 0 96px 48px;
+}
+html[data-hero="dither"] .partners-hero__tags { margin-bottom: 4px; }
+@media (max-width: 767px) {
+  html[data-hero="dither"] .partners-hero { min-height: 560px; margin-top: 24px; border-radius: 12px 12px 0 0; }
+  html[data-hero="dither"] .partners-hero__text { padding: 40px 20px 280px; }
+}
+
+/* tło z ditherem: wypełnia okno pod paskiem */
+html[data-hero="dither"] .hero-dither {
+  position: absolute;
+  inset: 0;
+  display: block;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .8;
+  /* zanikanie robi sam dither (hero-dither.js), bez maski CSS */
+}
+
+.hero-dither canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
+.hero-dither video { position: absolute; width: 1px; height: 1px; opacity: 0; }
+html:not(.dark)[data-hero="dither"] .hero-dither { opacity: .6; }
+
+/* sekcja hero w wariancie B: okno sięga dolnej linii sekcji */
+html[data-hero="dither"] main > section:first-child { padding-bottom: 0; }
+
+/* ---------- wariant C: płytka PCB (okno jak w Kenningu, materiał z ditherem, rzut izometryczny) ---------- */
+.hero-pcb { display: none; }
+html[data-hero="pcb"] .orbit { display: none; }
+html[data-hero="pcb"] .partners-hero {
+  --win-line: color-mix(in oklab, var(--color-border) 70%, transparent);
+  display: block;
+  position: relative;
+  min-height: 620px;
+  margin-top: 48px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--win-line);
+  border-bottom: 0;
+  border-radius: 16px 16px 0 0;
+  background: var(--color-background);
+}
+/* materiał: dither ciemniejszy niż border na całym oknie */
+html[data-hero="pcb"] .partners-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: color-mix(in oklab, var(--color-border) 55%, var(--color-background));
+  -webkit-mask: url("dither.png") repeat 0 0 / 320px 320px;
+          mask: url("dither.png") repeat 0 0 / 320px 320px;
+  pointer-events: none;
+}
+html[data-hero="pcb"] .partners-hero > .pointer-events-none.absolute { display: none; }
+html[data-hero="pcb"] .partners-hero__text { position: relative; z-index: 3; max-width: 520px; padding: 72px 0 96px 48px; }
+html[data-hero="pcb"] .hero-pcb {
+  --pcb-line: color-mix(in oklab, var(--color-foreground) 30%, transparent);
+  --pcb-pkg: color-mix(in oklab, var(--color-foreground) 50%, transparent);
+  --pcb-blue: oklch(66% .19 252);
+  display: block;
+  position: absolute;
+  z-index: 1;
+  /* rzut izometryczny liczy pcb.js (bez transformacji 3D w CSS) */
+  width: 900px;
+  right: -170px;
+  top: -20px;
+  /* cień rysuje pcb.js na podłodze */
+}
+
+/* telefon / tablet: płytka pod tekstem (w przepływie), nie nachodzi na napisy */
+@media (max-width: 1023px) {
+  html[data-hero="pcb"] .partners-hero { min-height: 0; }
+  html[data-hero="pcb"] .partners-hero__text { max-width: none; padding: 40px 24px 0; }
+  html[data-hero="pcb"] .hero-pcb {
+    position: relative;
+    right: auto; top: auto;
+    width: 170%;
+    left: -42%;
+    margin-top: -10px;
+    margin-bottom: -18%;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22%);
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 22%);
+  }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  html[data-hero="pcb"] .partners-hero__text { padding: 56px 40px 0; }
+  html[data-hero="pcb"] .hero-pcb { width: 120%; left: -6%; margin-bottom: -12%; }
+}
+.hero-pcb__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.pcb-trace { fill: none; stroke: var(--pcb-line); stroke-width: 2; transition: stroke 300ms; }
+.pcb-trace.is-lit { stroke: var(--pcb-blue); }
+.pcb-pin { fill: var(--pcb-pkg); }
+.pcb-pkg { fill: var(--color-background); stroke: var(--pcb-pkg); stroke-width: 1.2; transition: stroke 200ms, fill 200ms; }
+.pcb-lbl { fill: var(--color-foreground-muted); font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-anchor: middle; pointer-events: none; transition: fill 200ms; }
+.pcb-chip { cursor: pointer; outline: none; }
+.pcb-chip:hover .pcb-pkg, .pcb-chip:focus-visible .pcb-pkg { stroke: var(--pcb-blue); }
+.pcb-chip:hover .pcb-lbl, .pcb-chip:focus-visible .pcb-lbl { fill: var(--color-foreground); }
+.pcb-core { fill: var(--color-background-secondary); stroke: var(--color-foreground); stroke-width: 1.5; }
+.pcb-hex { fill: none; stroke: var(--color-foreground); stroke-width: 2; }
+.pcb-hex-in { fill: var(--color-foreground); }
+.pcb-pulse { fill: var(--pcb-blue); }
+.pcb-glow { fill: var(--pcb-blue); opacity: .25; }
+.pcb-grid { stroke: color-mix(in oklab, var(--color-foreground) 7%, transparent); stroke-width: 1; }
+.pcb-board { fill: var(--color-background); stroke: color-mix(in oklab, var(--color-foreground) 28%, transparent); stroke-width: 1.5; }
+.pcb-side { fill: color-mix(in oklab, var(--color-foreground) 14%, var(--color-background)); stroke: color-mix(in oklab, var(--color-foreground) 22%, transparent); stroke-width: .8; }
+.pcb-stack { fill: var(--color-background); stroke: color-mix(in oklab, var(--color-foreground) 16%, transparent); stroke-width: 1.2; }
+.pcb-smd { fill: color-mix(in oklab, var(--color-foreground) 8%, var(--color-background)); stroke: color-mix(in oklab, var(--color-foreground) 35%, transparent); stroke-width: .8; }
+.pcb-pad { fill: color-mix(in oklab, var(--color-foreground) 55%, transparent); }
+.pcb-via { fill: var(--color-background); stroke: color-mix(in oklab, var(--color-foreground) 40%, transparent); stroke-width: 1.4; }
+.pcb-hole { fill: none; stroke: color-mix(in oklab, var(--color-foreground) 30%, transparent); stroke-width: 1.2; }
+.pcb-hole-in { fill: color-mix(in oklab, var(--color-foreground) 10%, var(--color-background)); }
+.pcb-silk { fill: color-mix(in oklab, var(--color-foreground) 40%, transparent); font-family: var(--font-mono); font-size: 7px; letter-spacing: .08em; }
+.pcb-sub { fill: color-mix(in oklab, var(--color-foreground) 45%, transparent); font-family: var(--font-mono); font-size: 7.5px; letter-spacing: .12em; text-anchor: middle; pointer-events: none; }
+.pcb-die { fill: none; stroke: color-mix(in oklab, var(--color-foreground) 30%, transparent); stroke-width: 1; }
+.pcb-die-cell { fill: color-mix(in oklab, var(--color-foreground) 30%, transparent); }
+.pcb-pulse-glow { fill: var(--pcb-blue); opacity: .28; }
+.pcb-floor { stroke: color-mix(in oklab, var(--color-foreground) 9%, transparent); stroke-width: 1; }
+.pcb-floor--major { stroke: color-mix(in oklab, var(--color-foreground) 16%, transparent); }
+.pcb-shadow { fill: rgb(0 0 0 / .45); filter: blur(10px); }
+html:not(.dark) .pcb-shadow { fill: rgb(0 0 0 / .12); }
+.pcb-cable-out { fill: none; stroke: color-mix(in oklab, var(--color-foreground) 35%, transparent); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+.pcb-cable { fill: none; stroke: var(--color-background); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+.pcb-dim { fill: none; stroke: color-mix(in oklab, var(--color-foreground) 32%, transparent); stroke-width: 1; }
+.pcb-dim--main { stroke-dasharray: 4 3; }
+.pcb-dim-arrow { fill: color-mix(in oklab, var(--color-foreground) 45%, transparent); }
+.pcb-dim-txt { fill: color-mix(in oklab, var(--color-foreground) 50%, transparent); font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-anchor: middle; }
+.pcb-thin { fill: none; stroke: color-mix(in oklab, var(--color-foreground) 18%, transparent); stroke-width: 1; }
+.pcb-rail { fill: none; stroke: color-mix(in oklab, var(--color-foreground) 20%, transparent); stroke-width: 4; stroke-linecap: round; }
+.pcb-big { fill: color-mix(in oklab, var(--color-foreground) 6%, var(--color-background)); stroke: color-mix(in oklab, var(--color-foreground) 45%, transparent); stroke-width: 1; }
+.pcb-metal { fill: color-mix(in oklab, var(--color-foreground) 30%, var(--color-background)); stroke: color-mix(in oklab, var(--color-foreground) 60%, transparent); stroke-width: 1; }
+.pcb-port { fill: var(--color-background); stroke: color-mix(in oklab, var(--color-foreground) 40%, transparent); stroke-width: 1; }
+.pcb-coil { fill: none; stroke: color-mix(in oklab, var(--color-foreground) 50%, transparent); stroke-width: 2; }
+.pcb-led, .pcb-led-port { fill: color-mix(in oklab, var(--pcb-blue) 25%, var(--color-background)); stroke: color-mix(in oklab, var(--pcb-blue) 50%, transparent); stroke-width: .8; transition: fill 120ms; }
+.pcb-led.is-on { fill: var(--pcb-blue); filter: drop-shadow(0 0 4px var(--pcb-blue)); }
+.pcb-led-port { fill: var(--pcb-blue); opacity: .8; }
+.pcb-core.is-flash { stroke: var(--pcb-blue); filter: drop-shadow(0 0 6px var(--pcb-blue)); }
+/* ściany brył: bok jaśniejszy, front ciemniejszy, krawędzie delikatnie zaznaczone */
+.pcb-face-l { fill: color-mix(in oklab, var(--color-foreground) 22%, var(--color-background)); stroke: color-mix(in oklab, var(--color-foreground) 30%, transparent); stroke-width: .6; stroke-linejoin: round; }
+.pcb-face-f { fill: color-mix(in oklab, var(--color-foreground) 11%, var(--color-background)); stroke: color-mix(in oklab, var(--color-foreground) 30%, transparent); stroke-width: .6; stroke-linejoin: round; }
+
+/* ---------- orbity partnerów ---------- */
+.orbit {
+  --orbit-blue: oklch(62% .2 252);
+  --orbit-line: color-mix(in oklab, var(--color-foreground) 14%, transparent);
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  aspect-ratio: 640 / 420;        /* kadr przycięty do zasięgu pochylonych orbit */
+  margin: 0 auto;
+  touch-action: pan-y;
+}
+@media (max-width: 1023px) { .orbit { max-width: 560px; } }
+.orbit__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+.orbit__ring { fill: none; stroke: color-mix(in oklab, var(--color-foreground) 38%, transparent); stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 0 7; }
+.orbit__ring-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; fill: var(--color-foreground-muted); }
+.orbit__spoke { stroke: var(--orbit-line); stroke-width: 1; transition: stroke 250ms, opacity 250ms; }
+.orbit__spoke.is-active { stroke: var(--orbit-blue); }
+.orbit__dot { fill: var(--color-foreground); transition: fill 200ms; }
+.orbit__dot.is-active { fill: var(--orbit-blue); }
+.orbit__pulse { fill: none; stroke: var(--orbit-blue); stroke-width: 1.5; opacity: 0; }
+.orbit__pulse.is-active { animation: orbit-pulse 1.6s ease-out infinite; }
+@keyframes orbit-pulse { 0% { opacity: .9; r: 6; } 100% { opacity: 0; r: 22; } }
+.orbit__core-hex { fill: var(--color-background); stroke: var(--color-foreground); stroke-width: 1.5; }
+.orbit__core-glow { fill: var(--orbit-blue); opacity: .12; }
+.orbit__core-text { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; fill: var(--color-foreground); text-anchor: middle; }
+
+/* węzły: niewidoczne przyciski nad kropkami + etykieta jak na planecie w "Eventach" */
+.orbit__labels { position: absolute; inset: 0; }
+.orbit__node {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+}
+.orbit__node:focus-visible { outline: 2px solid var(--orbit-blue); outline-offset: 0; }
+.orbit__tag {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 2px);
+  padding: 5px 9px;
+  background: var(--orbit-blue);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 4px);
+  transition: opacity 200ms ease, transform 300ms var(--ease-out);
+}
+.orbit__tag small { display: block; margin-top: 2px; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; opacity: .75; }
+.orbit__node.is-active .orbit__tag { opacity: 1; transform: translate(-50%, 0); }
+.orbit__node.is-active { z-index: 2; }
+
+@media (prefers-reduced-motion: reduce) { .orbit__pulse.is-active { animation: none; opacity: .6; } }
+
+/* =========================================================
+   SIATKA
+   ========================================================= */
+.partners-bento {
+  --cols: 2;
+  --gap: 1px;
+  --row-ratio: 0.72;              /* wysokość komórki / szerokość komórki */
+  position: relative;
+  container-type: inline-size;
+}
+@media (min-width: 768px)  { .partners-bento { --cols: 3; } }
+@media (min-width: 1024px) { .partners-bento { --cols: 6; } }
+
+.partners-bento__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-auto-rows: calc((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols) * var(--row-ratio));
+  grid-auto-flow: row dense;
+  gap: var(--gap);
+  background: color-mix(in oklab, var(--color-border) 60%, transparent); /* = linie siatki */
+}
+
+/* ---------- kafel ---------- */
+.partner-tile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-background);
+  isolation: isolate;
+  transition: background-color 350ms var(--ease-out);
+}
+
+/* wariant 1: bento (różne rozmiary) */
+.partners-bento[data-layout="bento"] .partner-tile--wide { grid-column: span 2; }
+.partners-bento[data-layout="bento"] .partner-tile--big  { grid-column: span 2; grid-row: span 2; }
+
+/* wariant 2: równe kafle. 25 logo + kafel CTA, który dopełnia ostatni rząd */
+.partners-bento[data-layout="equal"] .partner-tile--cta { grid-column: span 1; }
+@media (min-width: 768px)  { .partners-bento[data-layout="equal"] .partner-tile--cta { grid-column: span 2; } }
+@media (min-width: 1024px) { .partners-bento[data-layout="equal"] .partner-tile--cta { grid-column: span 5; } }
+
+/* warstwy logo: maska (mono) + oryginał (kolor) w tym samym miejscu */
+.partner-tile__logo {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  max-height: calc(100% - 20px);   /* zostaw miejsce na podpis */
+  aspect-ratio: 230 / 169;
+}
+.partners-bento[data-layout="bento"] .partner-tile--big  .partner-tile__logo { max-width: 400px; width: 82%; }
+.partners-bento[data-layout="bento"] .partner-tile--wide .partner-tile__logo { height: 100%; width: auto; }
+
+.partner-tile__mono,
+.partner-tile__color {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 350ms var(--ease-out), transform 500ms var(--ease-out);
+}
+.partner-tile__mono {
+  background-color: var(--color-foreground);
+  -webkit-mask: var(--logo) center / contain no-repeat;
+          mask: var(--logo) center / contain no-repeat;
+  opacity: .82;
+}
+.partner-tile--knockout .partner-tile__mono {
+  -webkit-mask-mode: luminance;
+          mask-mode: luminance;
+}
+.partner-tile__color { object-fit: contain; opacity: 0; }
+
+/* ---------- tryb eksportu do Figmy (?figma=1) ----------
+   Figma nie importuje CSS mask-image, więc logo pokazujemy jako zwykłe SVG z płaskimi kolorami. */
+.partner-tile__flat { display: none; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+html.figma-export .partner-tile__mono { display: none; }
+html.figma-export.dark .partner-tile__flat--dark,
+html.figma-export:not(.dark) .partner-tile__flat--light { display: block; }
+/* hover w trybie Figmy działa jak zwykle: płaskie logo znika, kolorowe się pojawia */
+.partner-tile:hover .partner-tile__flat,
+.partner-tile:has(:focus-visible) .partner-tile__flat,
+.partner-tile.is-active .partner-tile__flat { opacity: 0; }
+/* pasek prototypu zostaje; klawisz H chowa go przed przechwyceniem */
+.proto-bar.is-hidden { display: none; }
+html.figma-export *, html.figma-export *::before, html.figma-export *::after { transition: none !important; animation: none !important; }
+
+/* podpis */
+.partner-tile__meta {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--tile-hover-fg);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 300ms ease, transform 400ms var(--ease-out);
+  pointer-events: none;
+}
+.partner-tile__meta span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.partner-tile__meta span:last-child { flex: none; opacity: .55; white-space: nowrap; }
+/* wąski kafel: tylko nazwa */
+.partner-tile { container-type: size; }
+@container (max-width: 190px) { .partner-tile__meta span:last-child { display: none; } }
+
+/* strzałka "rozwiń podgląd" */
+.partner-tile__open {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--tile-hover-fg);
+  color: var(--tile-hover-bg);
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(.7);
+  transition: opacity 250ms ease, transform 400ms var(--ease-out), background-color 200ms;
+}
+.partner-tile__open svg { transition: transform 300ms var(--ease-out); }
+.partner-tile__open:hover svg,
+.partner-tile__open:focus-visible svg { transform: translate(1.5px, -1.5px); }
+.partner-tile__open:focus-visible { outline: 2px solid var(--color-border-blue); outline-offset: 2px; }
+
+/* ---------- stan aktywny (hover / fokus / otwarty podgląd) ---------- */
+.partner-tile:hover,
+.partner-tile:has(:focus-visible),
+.partner-tile.is-active { background: var(--tile-hover-bg); }
+
+.partner-tile:hover .partner-tile__mono,
+.partner-tile:has(:focus-visible) .partner-tile__mono,
+.partner-tile.is-active .partner-tile__mono { opacity: 0; transform: scale(1.04); }
+
+.partner-tile:hover .partner-tile__color,
+.partner-tile:has(:focus-visible) .partner-tile__color,
+.partner-tile.is-active .partner-tile__color { opacity: 1; transform: scale(1.04); }
+
+.partner-tile:hover .partner-tile__meta,
+.partner-tile:has(:focus-visible) .partner-tile__meta,
+.partner-tile.is-active .partner-tile__meta { opacity: 1; transform: none; }
+
+.partner-tile:hover .partner-tile__open,
+.partner-tile:has(:focus-visible) .partner-tile__open,
+.partner-tile.is-active .partner-tile__open { opacity: 1; transform: none; }
+
+/* ekrany dotykowe: brak hovera, więc strzałka jest zawsze widoczna */
+@media (hover: none) {
+  .partner-tile__open {
+    opacity: 1;
+    transform: none;
+    background: transparent;
+    color: var(--color-foreground);
+    border: 1px solid color-mix(in oklab, var(--color-border) 80%, transparent);
+    width: 30px; height: 30px; top: 8px; right: 8px;
+  }
+  /* po dotknięciu kafel robi się jasny: strzałka jak na desktopie (ciemne kółko, jasna ikona) */
+  .partner-tile:hover .partner-tile__open,
+  .partner-tile:has(:focus-visible) .partner-tile__open,
+  .partner-tile.is-active .partner-tile__open {
+    background: var(--tile-hover-fg);
+    border-color: var(--tile-hover-fg);
+    color: var(--tile-hover-bg);
+  }
+}
+
+/* sąsiednie kafle lekko przygasają, gdy kursor jest nad siatką */
+@media (hover: hover) {
+  .partners-bento__grid:hover .partner-tile:not(:hover) .partner-tile__mono { opacity: .45; }
+}
+
+/* ---------- kafel CTA ---------- */
+.partner-tile--cta {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 16px;
+  text-decoration: none;
+  color: var(--color-foreground);
+}
+.partner-tile--cta .cta-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--color-foreground-muted);
+}
+.partner-tile--cta .cta-title { font-size: 15px; font-weight: 500; line-height: 1.3; }
+.partner-tile--cta .cta-desc { display: none; max-width: 46ch; font-size: 13px; line-height: 1.55; color: var(--color-foreground-muted); }
+.partner-tile--cta .cta-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; height: 48px;
+  border-radius: 999px;
+  border: 1px solid var(--color-foreground);
+  background: var(--color-foreground);
+  color: var(--color-background);
+  transition: transform 300ms var(--ease-out), background-color 300ms;
+}
+.partner-tile--cta .cta-arrow svg { width: 20px; height: 20px; }
+/* niski kafel CTA: bez etykiety, mniejsza strzałka */
+@container (max-height: 130px) {
+  .partner-tile--cta .cta-label { display: none; }
+  .partner-tile--cta .cta-arrow { width: 40px; height: 40px; }
+}
+/* szeroki CTA w układzie równych kafli: tekst po lewej, strzałka po prawej */
+@media (min-width: 768px) {
+  .partners-bento[data-layout="equal"] .partner-tile--cta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-content: center;
+    column-gap: 40px;
+    row-gap: 0;
+    padding: 32px 40px;
+  }
+  .partners-bento[data-layout="equal"] .partner-tile--cta > :not(.cta-arrow) { grid-column: 1; }
+  .partners-bento[data-layout="equal"] .partner-tile--cta .cta-label { margin-bottom: 12px; }
+  .partners-bento[data-layout="equal"] .partner-tile--cta .cta-title { font-size: 22px; line-height: 1.25; }
+  .partners-bento[data-layout="equal"] .partner-tile--cta .cta-desc { display: block; margin-top: 8px; }
+  .partners-bento[data-layout="equal"] .partner-tile--cta .cta-arrow {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    align-self: center;
+    width: 56px;
+    height: 56px;
+  }
+}
+.partner-tile--cta:hover .cta-title,
+.partner-tile--cta:focus-visible .cta-title { color: var(--tile-hover-fg); }
+.partner-tile--cta:hover .cta-label,
+.partner-tile--cta:hover .cta-desc,
+.partner-tile--cta:focus-visible .cta-label { color: color-mix(in oklab, var(--tile-hover-fg) 60%, transparent); }
+.partner-tile--cta:hover .cta-arrow,
+.partner-tile--cta:focus-visible .cta-arrow {
+  transform: translateX(4px);
+  background: var(--tile-hover-fg);
+  border-color: var(--tile-hover-fg);
+  color: var(--tile-hover-bg);
+}
+.partner-tile--cta:focus-visible { outline: none; background: var(--tile-hover-bg); box-shadow: inset 0 0 0 2px var(--color-border-blue); }
+
+/* =========================================================
+   PODGLĄD PARTNERA (.pp): panel z prawej, na telefonie od dołu
+   Bez zaokrągleń, podział cienkimi liniami jak siatka strony.
+   Skala odstępów: 8 / 16 / 24 / 32 / 40
+   ========================================================= */
+.pp[hidden] { display: none; }
+.pp {
+  --pp-line: color-mix(in oklab, var(--color-border) 60%, transparent);
+  --pp-pad: 40px;
+  --pp-bar: 64px;
+  position: fixed;
+  top: 0; bottom: 0; left: 0;
+  width: 100vw;               /* także pod rezerwą na pasek przewijania */
+  z-index: 1000;
+}
+
+.pp__backdrop {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in oklab, var(--color-background) 55%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 350ms ease;
+}
+.pp[data-state="open"] .pp__backdrop { opacity: 1; }
+
+.pp__card {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: min(560px, 100vw);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  border-left: 1px solid var(--pp-line);
+  transform: translateX(100%);
+  transition: transform 450ms var(--ease-out);
+}
+.pp[data-state="open"] .pp__card { transform: none; }
+
+/* --- górny pasek: kategoria + licznik | ‹ › × jako komórki --- */
+.pp__bar {
+  display: flex;
+  flex: none;
+  align-items: stretch;
+  justify-content: space-between;
+  height: var(--pp-bar);
+  border-bottom: 1px solid var(--pp-line);
+}
+.pp__crumbs {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 var(--pp-pad);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.pp__tag { color: var(--color-foreground); }
+.pp__count { color: var(--color-foreground-muted); font-variant-numeric: tabular-nums; }
+.pp__count::before { content: ""; display: inline-block; width: 1px; height: 12px; margin-right: 16px; vertical-align: -1px; background: var(--pp-line); }
+
+.pp__nav { display: flex; }
+.pp__btn {
+  display: grid;
+  place-items: center;
+  width: var(--pp-bar);
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--pp-line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-foreground);
+  cursor: pointer;
+  transition: background-color 200ms;
+}
+.pp__btn:hover { background: var(--color-background-secondary); }
+.pp__btn:focus-visible { outline: 2px solid var(--color-border-blue); outline-offset: -2px; }
+
+/* --- przewijana część --- */
+.pp__scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+
+/* logo: przycięte do obrysu, wycentrowane, rozmiar wyrównany "powierzchnią" */
+.pp__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 240px;
+  padding: var(--pp-pad);
+  background: var(--tile-hover-bg);
+  border-bottom: 1px solid var(--pp-line);
+}
+.pp__logo img {
+  display: block;
+  width: var(--logo-w, 220px);
+  height: var(--logo-h, 70px);
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.pp__body { padding: var(--pp-pad); }
+.pp__title { margin: 0 0 24px; font-size: 30px; line-height: 1.15; font-weight: 500; letter-spacing: -.015em; }
+.pp__text p { margin: 0 0 16px; font-size: 15px; line-height: 1.7; color: var(--color-foreground-muted); text-wrap: pretty; }
+.pp__text p:last-child { margin-bottom: 0; }
+
+/* --- dół: link jako pełna komórka --- */
+.pp__link {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 16px;
+  height: 72px;
+  padding: 0 var(--pp-pad);
+  border-top: 1px solid var(--pp-line);
+  color: var(--color-foreground);
+  text-decoration: none;
+  transition: background-color 200ms, color 200ms;
+}
+.pp__link[hidden] { display: none; }
+.pp__link-label { font-size: 15px; font-weight: 500; }
+.pp__link-url {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--color-foreground-muted);
+  transition: color 200ms;
+}
+.pp__link svg { flex: none; transition: transform 300ms var(--ease-out); }
+.pp__link:hover { background: var(--color-foreground); color: var(--color-background); }
+.pp__link:hover .pp__link-url { color: color-mix(in oklab, var(--color-background) 70%, transparent); }
+.pp__link:hover svg { transform: translate(2px, -2px); }
+.pp__link:focus-visible { outline: 2px solid var(--color-border-blue); outline-offset: -2px; }
+
+/* zmiana partnera strzałkami: krótkie przenikanie treści */
+.pp__logo img, .pp__body, .pp__crumbs, .pp__link-url { transition: opacity 200ms ease, transform 300ms var(--ease-out); }
+.pp__card.is-swapping .pp__logo img,
+.pp__card.is-swapping .pp__body,
+.pp__card.is-swapping .pp__crumbs,
+.pp__card.is-swapping .pp__link-url { opacity: 0; transform: translateY(6px); }
+
+/* --- tablet: panel na cały ekran --- */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .pp:not([data-mode="overlay"]) .pp__card { width: 100%; border-left: 0; }
+  .pp:not([data-mode="overlay"]) .pp__logo { height: 320px; }
+  .pp:not([data-mode="overlay"]) .pp__text { max-width: 68ch; }
+}
+
+/* --- telefon: panel od dołu --- */
+@media (max-width: 767px) {
+  .pp { --pp-pad: 20px; --pp-bar: 56px; }
+  .pp__card {
+    top: auto; left: 0;
+    width: 100%;
+    height: min(85vh, 680px);     /* stała wysokość: nie skacze przy zmianie partnera */
+    height: min(85dvh, 680px);
+    border-left: 0;
+    border-top: 1px solid var(--pp-line);
+    transform: translateY(100%);
+  }
+  .pp__logo { height: 180px; }
+  .pp__title { font-size: 24px; margin-bottom: 16px; }
+  .pp__link { height: 64px; }
+}
+
+/* ---------- wariant B: w siatce ----------
+   Karta wyrasta z klikniętego kafla (FLIP) i zajmuje górę siatki na wysokość ekranu.
+   Logo jest wycentrowane w obu osiach swojej kolumny, tekst wycentrowany w pionie. */
+.pp[data-mode="overlay"] {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  pointer-events: none;
+}
+.pp[data-mode="overlay"] .pp__backdrop { display: none; }
+.pp[data-mode="overlay"] .pp__card {
+  pointer-events: auto;
+  top: 0; left: 0; right: 0; bottom: auto;
+  width: auto;
+  height: min(100%, calc(100vh - 150px));   /* miejsce na pasek prototypu */
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas: "logo bar" "logo body" "logo link";
+  border: 0;
+  box-shadow: 0 30px 80px -30px rgb(0 0 0 / .6);
+  transform-origin: 0 0;
+  transform: var(--flip, none);
+  transition: transform 550ms var(--ease-out);
+}
+.pp[data-mode="overlay"][data-state="open"] .pp__card { transform: none; }
+.pp[data-mode="overlay"] .pp__scroll { display: contents; }
+.pp[data-mode="overlay"] .pp__bar  { grid-area: bar; }
+.pp[data-mode="overlay"] .pp__link { grid-area: link; }
+.pp[data-mode="overlay"] .pp__logo {
+  grid-area: logo;
+  height: auto;
+  border-bottom: 0;
+  border-right: 1px solid var(--pp-line);
+}
+.pp[data-mode="overlay"] .pp__logo img {
+  width: calc(var(--logo-w, 220px) * 1.25);
+  height: calc(var(--logo-h, 70px) * 1.25);
+}
+.pp[data-mode="overlay"] .pp__body {
+  grid-area: body;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+  padding: 40px 56px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.pp[data-mode="overlay"] .pp__title { font-size: 36px; }
+.pp[data-mode="overlay"] .pp__text { max-width: 62ch; }
+/* treść pojawia się, gdy karta już się rozrosła */
+.pp[data-mode="overlay"] .pp__bar > *,
+.pp[data-mode="overlay"] .pp__body,
+.pp[data-mode="overlay"] .pp__link,
+.pp[data-mode="overlay"] .pp__logo img { opacity: 0; transition: opacity 250ms ease; }
+.pp[data-mode="overlay"][data-state="open"] .pp__bar > *,
+.pp[data-mode="overlay"][data-state="open"] .pp__body,
+.pp[data-mode="overlay"][data-state="open"] .pp__link,
+.pp[data-mode="overlay"][data-state="open"] .pp__logo img { opacity: 1; transition-delay: 300ms; }
+
+/* rozmycie wszystkiego poza kartą */
+html.pp-blur header,
+html.pp-blur footer,
+html.pp-blur main > section:not(#partners-grid),
+html.pp-blur #partners-grid > div > :not(.partners-bento),
+html.pp-blur .partners-bento__grid {
+  filter: blur(8px);
+  opacity: .4;
+  transition: filter 400ms ease, opacity 400ms ease;
+}
+header, footer, main > section, #partners-grid > div > *, .partners-bento__grid {
+  transition: filter 400ms ease, opacity 400ms ease;
+}
+
+/* =========================================================
+   PASEK PROTOTYPU (tylko do porównywania wariantów)
+   ========================================================= */
+.proto-bar {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  z-index: 900;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 14px;
+  max-width: calc(100vw - 32px);
+  padding: 6px 8px 6px 14px;
+  border: 1px solid color-mix(in oklab, var(--color-border) 80%, transparent);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--color-background-secondary) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 40px -12px rgb(0 0 0 / .45);
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--color-foreground-muted);
+}
+.proto-bar__group { display: flex; align-items: center; gap: 8px; }
+.proto-bar__seg {
+  display: flex;
+  padding: 2px;
+  border: 1px solid color-mix(in oklab, var(--color-border) 70%, transparent);
+  border-radius: 999px;
+}
+.proto-bar__seg button {
+  padding: 5px 11px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-foreground-muted);
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+.proto-bar__seg button[aria-pressed="true"] { background: var(--color-foreground); color: var(--color-background); }
+@media (max-width: 767px) { .proto-bar { border-radius: 16px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-tile, .partner-tile *, .pp, .pp * { transition: none !important; }
+}
+
+/* =========================================================
+   PODGLĄD DO PRZECHWYCENIA W FIGMIE (tryb Figma + otwarty panel)
+   Panel staje się zwykłą stroną w układzie dokumentu: bez position:fixed, animacji,
+   rozmycia i blokady przewijania. Reszta strony jest ukryta, a tło za panelem
+   to jednolita, przyciemniona warstwa.
+   ========================================================= */
+html.pp-capture { overflow: visible !important; }
+html.pp-capture body > *:not(.pp):not(.proto-bar):not(script) { display: none !important; }
+html.pp-capture .pp {
+  position: relative !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-end;
+  background: var(--color-background);
+}
+html.pp-capture .pp__backdrop {
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: color-mix(in oklab, var(--color-background) 70%, var(--color-background-secondary));
+}
+html.pp-capture .pp__card {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  clip-path: none !important;
+  opacity: 1 !important;
+  min-height: 100vh;
+  box-shadow: none !important;
+}
+html.pp-capture .pp__card > *,
+html.pp-capture .pp__card .pp__bar > *,
+html.pp-capture .pp__logo img { opacity: 1 !important; }
+
+/* wariant B (w siatce) w przechwyceniu: pełna szerokość, dwie kolumny */
+html.pp-capture .pp[data-mode="overlay"] .pp__card { width: 100%; height: 100vh; min-height: 0; }
+
+/* tablet: panel na cały ekran */
+@media (min-width: 768px) and (max-width: 1023px) {
+  html.pp-capture .pp__card { width: 100% !important; }
+}
+/* telefon: panel od dołu na tle przyciemnionej strony */
+@media (max-width: 767px) {
+  html.pp-capture .pp { align-items: flex-end; }
+  html.pp-capture .pp__card { min-height: 0; width: 100% !important; }
+}
+
+/* =========================================================
+   LOGOTYPY ZAWSZE JAKO PŁASKIE SVG (bez masek CSS)
+   Wygląda tak samo jak maska, a narzędzia do przechwytywania (Figma) biorą je bez trybu ?figma=1.
+   ========================================================= */
+.partner-tile__mono { display: none !important; }
+html.dark .partner-tile__flat--dark,
+html:not(.dark) .partner-tile__flat--light { display: block; }
+.partner-tile__flat { transition: opacity 350ms var(--ease-out), transform 500ms var(--ease-out); }
+.partner-tile:hover .partner-tile__flat,
+.partner-tile:has(:focus-visible) .partner-tile__flat,
+.partner-tile.is-active .partner-tile__flat { opacity: 0; transform: scale(1.04); }
+@media (hover: hover) {
+  .partners-bento__grid:hover .partner-tile:not(:hover) .partner-tile__flat { opacity: .55; }
+}
+
+/* ---------- zakładki branż ---------- */
+.partners-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-inline: -16px;
+  padding-inline: 16px;
+}
+.partners-tabs::-webkit-scrollbar { display: none; }
+@media (min-width: 640px) { .partners-tabs { flex-wrap: wrap; overflow: visible; margin-inline: 0; padding-inline: 0; } }
+.partners-tabs__btn {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid color-mix(in oklab, var(--color-border) 80%, transparent);
+  border-radius: 999px;
+  background: var(--color-background);
+  color: var(--color-foreground-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 200ms, background-color 200ms, border-color 200ms;
+}
+.partners-tabs__btn:hover { color: var(--color-foreground); border-color: var(--color-foreground-muted); }
+.partners-tabs__btn[aria-pressed="true"] { background: var(--color-foreground); border-color: var(--color-foreground); color: var(--color-background); }
+.partners-tabs__btn:focus-visible { outline: 2px solid var(--color-foreground); outline-offset: 2px; }
+.partners-tabs__n { font-size: 11px; opacity: .55; }
+.partner-tile[hidden] { display: none !important; }
+@keyframes partners-in { from { opacity: 0; transform: translateY(6px); } }
+.partners-bento.is-filtering .partner-tile:not([hidden]) { animation: partners-in 420ms var(--ease-out) both; }
+html.figma-export .partners-bento .partner-tile { animation: none !important; }
+/* CTA w jednej komórce po filtrowaniu: zwykły pionowy kafel */
+.partners-bento .partner-tile--cta.is-narrow { display: flex; padding: 16px; }
+.partners-bento .partner-tile--cta.is-narrow .cta-label { margin-bottom: 0; }
+.partners-bento .partner-tile--cta.is-narrow .cta-title { font-size: 15px; }
+.partners-bento .partner-tile--cta.is-narrow .cta-desc { display: none; }
+.partners-bento .partner-tile--cta.is-narrow .cta-arrow { width: 48px; height: 48px; align-self: flex-start; }
+/* CTA na powierzchni (surface), żeby odstawał od kafli z logo; hover bez zmian */
+.partner-tile--cta { background: color-mix(in oklab, var(--color-foreground) 20%, var(--color-background)); }
+html:not(.dark) .partner-tile--cta { background: color-mix(in oklab, var(--color-foreground) 5%, var(--color-background)); }
+.partner-tile--cta:hover { background: var(--tile-hover-bg); }
+html:not(.dark) .partner-tile--cta:hover { background: color-mix(in oklab, var(--color-foreground) 12%, var(--color-background)); }
+/* szeroki CTA w niskim rzędzie (np. po filtrowaniu, 1024px): mniej paddingu, bez etykiety i opisu, żeby nic nie ucinało */
+@media (min-width: 768px) {
+  /* uwaga: zapytanie mierzy wnętrze kafla (bez paddingu 32px) */
+  @container (max-height: 100px) {
+    .partners-bento[data-layout="equal"] .partner-tile--cta .cta-label { display: none; }
+    .partners-bento[data-layout="equal"] .partner-tile--cta .cta-desc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .partners-bento[data-layout="equal"] .partner-tile--cta .cta-arrow { width: 48px; height: 48px; }
+  }
+  @container (max-height: 70px) {
+    .partners-bento[data-layout="equal"] .partner-tile--cta .cta-desc { display: none; }
+  }
+}
+/* etykiety w pasku prototypu: inny kolor niż przyciski, żeby się nie zlewały */
+.proto-bar { --proto-label: oklch(74% 0.13 245); }
+html:not(.dark) .proto-bar { --proto-label: oklch(52% 0.17 255); }
+.proto-bar__label { color: var(--proto-label); font-weight: 500; }
+.proto-bar__label, .proto-bar__seg button { white-space: nowrap; }
+
+/* ---------- Hero color: mono wyłącza niebieski akcent we wszystkich hero (dither robi to w JS) ---------- */
+html[data-tint="mono"][data-hero="pcb"] .hero-pcb { --pcb-blue: var(--color-foreground); }
+html[data-tint="mono"] .orbit { --orbit-blue: var(--color-foreground); }
+html[data-tint="mono"] .orbit__tag { color: var(--color-background); }
+/* Accent widoczny też w spoczynku, nie tylko na hoverze/impulsie */
+html:not([data-tint="mono"]) .orbit__ring { stroke: color-mix(in oklab, var(--orbit-blue) 70%, transparent); }
+html:not([data-tint="mono"]) .orbit__ring-label { fill: color-mix(in oklab, var(--orbit-blue) 85%, var(--color-foreground)); }
+html:not([data-tint="mono"]) .orbit__spoke { stroke: color-mix(in oklab, var(--orbit-blue) 30%, transparent); }
+html:not([data-tint="mono"]) .orbit__core-hex { stroke: var(--orbit-blue); }
+html:not([data-tint="mono"]) .orbit__core-glow { opacity: .28; }
+html:not([data-tint="mono"]) .pcb-trace { stroke: color-mix(in oklab, var(--pcb-blue) 45%, var(--pcb-line)); }
+html:not([data-tint="mono"]) .pcb-trace.is-lit { stroke: var(--pcb-blue); }
+html:not([data-tint="mono"]) .pcb-core { stroke: var(--pcb-blue); }
+/* wariant B przy krótkiej siatce (zakładka z 3-5 partnerami): siatka rośnie na czas podglądu, żeby karta się nie zgniatała */
+.partners-bento:has(> .pp[data-mode="overlay"]:not([hidden])) { min-height: min(560px, calc(100vh - 150px)); }
+.pp[data-mode="overlay"] .pp__body { justify-content: safe center; }
+/* wariant B: przenikanie przy zmianie partnera strzałkami (reguła "open" wyżej miała większą wagę i je blokowała) */
+.pp[data-mode="overlay"][data-state="open"] .pp__card.is-swapping .pp__body,
+.pp[data-mode="overlay"][data-state="open"] .pp__card.is-swapping .pp__link-url,
+.pp[data-mode="overlay"][data-state="open"] .pp__card.is-swapping .pp__logo img { opacity: 0; transition-delay: 0s; transition-duration: 160ms; }
+.pp[data-mode="overlay"][data-state="open"] .pp__card:not(.is-swapping) .pp__body,
+.pp[data-mode="overlay"][data-state="open"] .pp__card:not(.is-swapping) .pp__logo img { transition-delay: 0s; }
+.pp[data-mode="overlay"][data-state="open"].is-entering .pp__card:not(.is-swapping) .pp__body,
+.pp[data-mode="overlay"][data-state="open"].is-entering .pp__card:not(.is-swapping) .pp__logo img { transition-delay: 300ms; }
+/* zmiana partnera bez skakania: tekst zaczyna się zawsze w tym samym miejscu (nie centruje się do długości opisu),
+   kategoria i licznik też przenikają, samo przenikanie bez przesunięcia */
+.pp[data-mode="overlay"] .pp__body { justify-content: flex-start; padding-top: 56px; }
+.pp[data-mode="overlay"][data-state="open"] .pp__card.is-swapping .pp__crumbs { opacity: 0; transition-delay: 0s; transition-duration: 160ms; }
+.pp[data-mode="overlay"][data-state="open"] .pp__card:not(.is-swapping) .pp__crumbs { transition-delay: 0s; }
+.pp__card.is-swapping .pp__logo img,
+.pp__card.is-swapping .pp__body,
+.pp__card.is-swapping .pp__crumbs,
+.pp__card.is-swapping .pp__link-url { transform: none; }
+.pp[data-mode="overlay"] .pp__body { padding-top: var(--pp-top, 56px); }
+.pp__crumbs, .pp__count, .pp__tag { white-space: nowrap; }
+/* wariant B, zamykanie/otwieranie: karta w locie ma kolor aktywnego kafla (bez połowy białej i połowy czarnej),
+   więc ląduje dokładnie jak kafel z kolorowym logo pod spodem */
+.pp[data-mode="overlay"] .pp__card { transition: transform 550ms var(--ease-out), background-color 220ms ease, box-shadow 220ms ease; }
+.pp[data-mode="overlay"][data-state="closed"] .pp__card { background: var(--tile-hover-bg); box-shadow: none; }
+.pp[data-mode="overlay"] .pp__card * { transition-property: opacity, transform, border-color, background-color; }
+.pp[data-mode="overlay"][data-state="closed"] .pp__card,
+.pp[data-mode="overlay"][data-state="closed"] .pp__card * { border-color: transparent !important; }
+/* pod koniec lotu karta znika płynnie, a spod niej wyłania się kafel z logo */
+.pp[data-mode="overlay"] .pp__card { transition: transform 550ms var(--ease-out), background-color 220ms ease, box-shadow 220ms ease, opacity 120ms ease 0s; }
+.pp[data-mode="overlay"][data-state="closed"] .pp__card { opacity: 0; transition: transform 550ms var(--ease-out), background-color 220ms ease, box-shadow 220ms ease, opacity 220ms ease 330ms; }
+
+/* ============================================================
+   Wariant B, nowe wejście: zamiast skalowania karty z kafla (FLIP, rwało się)
+   pojawianie z rozmyciem jak przyciski na stronie (opacity 0 + blur-sm -> opacity 100 + blur-none).
+   Tło: jedna warstwa backdrop-filter z animowanym kryciem zamiast animowania filter: blur na całych sekcjach.
+   ============================================================ */
+html.pp-blur header,
+html.pp-blur footer,
+html.pp-blur main > section:not(#partners-grid),
+html.pp-blur #partners-grid > div > :not(.partners-bento),
+html.pp-blur .partners-bento__grid { filter: none; opacity: 1; }
+
+/* zasłona tylko nad siatką (fixed nie zadziała: siatka ma container-type = własny blok zawierający) */
+.pp[data-mode="overlay"] .pp__backdrop {
+  display: block;
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+  background: color-mix(in oklab, var(--color-background) 60%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.pp[data-mode="overlay"][data-state="open"] .pp__backdrop { opacity: 1; }
+
+.pp[data-mode="overlay"] .pp__card,
+.pp[data-mode="overlay"][data-state="open"] .pp__card,
+.pp[data-mode="overlay"][data-state="closed"] .pp__card {
+  z-index: 1;
+  transform: none;
+  background: var(--color-background);
+  box-shadow: 0 30px 80px -30px rgb(0 0 0 / .6);
+  filter: blur(4px);
+  opacity: 0;
+  transition: opacity 260ms ease, filter 260ms ease;
+}
+.pp[data-mode="overlay"][data-state="open"] .pp__card { opacity: 1; filter: blur(0); }
+.pp[data-mode="overlay"][data-state="closed"] .pp__card,
+.pp[data-mode="overlay"][data-state="closed"] .pp__card * { border-color: var(--pp-line) !important; }
+
+/* treść wchodzi kaskadą, każda część z rozmyciem */
+.pp[data-mode="overlay"] .pp__bar > *,
+.pp[data-mode="overlay"] .pp__logo img,
+.pp[data-mode="overlay"] .pp__title,
+.pp[data-mode="overlay"] .pp__text,
+.pp[data-mode="overlay"] .pp__link {
+  opacity: 0;
+  filter: blur(4px);
+  transform: translateY(6px);
+  transition: opacity 300ms ease, filter 300ms ease, transform 400ms var(--ease-out);
+  transition-delay: 0s;
+}
+.pp[data-mode="overlay"] .pp__body { opacity: 1 !important; filter: none; transform: none; }
+.pp[data-mode="overlay"][data-state="open"] .pp__bar > *,
+.pp[data-mode="overlay"][data-state="open"] .pp__logo img,
+.pp[data-mode="overlay"][data-state="open"] .pp__title,
+.pp[data-mode="overlay"][data-state="open"] .pp__text,
+.pp[data-mode="overlay"][data-state="open"] .pp__link { opacity: 1; filter: blur(0); transform: none; }
+.pp[data-mode="overlay"][data-state="open"].is-entering .pp__logo img { transition-delay: 80ms; }
+.pp[data-mode="overlay"][data-state="open"].is-entering .pp__bar > * { transition-delay: 120ms; }
+.pp[data-mode="overlay"][data-state="open"].is-entering .pp__title { transition-delay: 160ms; }
+.pp[data-mode="overlay"][data-state="open"].is-entering .pp__text { transition-delay: 220ms; }
+.pp[data-mode="overlay"][data-state="open"].is-entering .pp__link { transition-delay: 280ms; }
+
+/* zmiana partnera strzałkami: ten sam efekt, krócej i bez kaskady */
+.pp[data-mode="overlay"][data-state="open"] .pp__card.is-swapping .pp__crumbs,
+.pp[data-mode="overlay"][data-state="open"] .pp__card.is-swapping .pp__logo img,
+.pp[data-mode="overlay"][data-state="open"] .pp__card.is-swapping .pp__title,
+.pp[data-mode="overlay"][data-state="open"] .pp__card.is-swapping .pp__text,
+.pp[data-mode="overlay"][data-state="open"] .pp__card.is-swapping .pp__link-url { opacity: 0; filter: blur(4px); transform: none; transition-duration: 160ms; transition-delay: 0s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pp[data-mode="overlay"] .pp__card, .pp[data-mode="overlay"] .pp__card * { filter: none !important; transform: none !important; }
+}
+html.figma-export .pp[data-mode="overlay"] .pp__card, html.figma-export .pp[data-mode="overlay"] .pp__card * { filter: none !important; }
+/* reszta strony (header, sekcje wokół) tylko przygasa: samo opacity, bez kosztownego blur w animacji */
+html.pp-blur header,
+html.pp-blur footer,
+html.pp-blur main > section:not(#partners-grid),
+html.pp-blur #partners-grid > div > :not(.partners-bento) { opacity: .35; transition: opacity 300ms ease; }
+header, footer, main > section, #partners-grid > div > * { transition: opacity 300ms ease; }
+/* hover bez migania: warstwy logo stale na GPU. Bez tego przeglądarka tworzy i zwalnia warstwę przy każdej animacji
+   (kafel pod kursorem + przygaszanie sąsiadów) i przerasterowuje SVG na końcu, co daje mignięcia w losowych kaflach */
+.partner-tile__flat,
+.partner-tile__color,
+.partner-tile__open,
+.partner-tile__meta { will-change: opacity, transform; backface-visibility: hidden; }
+/* szczelina 1px między kaflami nie przełącza już przygaszenia całej siatki: przygaszamy tylko, gdy kursor jest na kaflu */
+@media (hover: hover) {
+  .partners-bento__grid:hover .partner-tile:not(:hover) .partner-tile__flat { opacity: 1; }
+  .partners-bento__grid:has(.partner-tile:hover) .partner-tile:not(:hover) .partner-tile__flat { opacity: .55; }
+  .partner-tile__flat { transition: opacity 350ms var(--ease-out) 40ms, transform 500ms var(--ease-out); }
+}
+@media (max-width: 1180px) { .proto-bar { border-radius: 16px; } }

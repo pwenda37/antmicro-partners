@@ -1,0 +1,458 @@
+/* Kontakt: hero z formularzem + siatka biur. Tokeny kolorów strony (--color-*). */
+
+:root { --ease-out: cubic-bezier(.2, .7, .2, 1); }
+.contact-line { --line: color-mix(in oklab, var(--color-border) 60%, transparent); }
+
+/* ---------- hero ---------- */
+.contact-hero { gap: 48px; padding-top: 64px; padding-bottom: 72px; align-items: start; }
+@media (min-width: 768px)  { .contact-hero { padding-top: 96px; padding-bottom: 96px; } }
+@media (min-width: 1024px) { .contact-hero { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 64px; } }
+.contact-hero__lead { max-width: 52ch; }
+
+.contact-mail {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: max-content;
+  max-width: 100%;
+  margin-top: 8px;
+  padding: 0 0 0 20px;
+  border: 1px solid color-mix(in oklab, var(--color-border) 60%, transparent);
+  background: var(--color-background);
+}
+.contact-mail__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--color-foreground-muted);
+}
+.contact-mail__link {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-foreground);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.contact-mail__link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.contact-mail__copy {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  flex: none;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid color-mix(in oklab, var(--color-border) 60%, transparent);
+  background: transparent;
+  color: var(--color-foreground);
+  cursor: pointer;
+  transition: background-color 200ms;
+}
+.contact-mail__copy:hover { background: var(--color-background-secondary); }
+.contact-mail__copy:focus-visible { outline: 2px solid var(--color-border-blue); outline-offset: -2px; }
+.contact-mail__copied {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  padding: 4px 8px;
+  background: oklch(62% .2 252);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, 4px);
+  transition: opacity 200ms, transform 300ms var(--ease-out);
+  pointer-events: none;
+}
+.contact-mail__copy.is-copied .contact-mail__copied { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- formularz ---------- */
+.contact-form {
+  --line: color-mix(in oklab, var(--color-border) 60%, transparent);
+  position: relative;
+  z-index: 10;
+  border: 1px solid var(--line);
+  background: var(--color-background);
+}
+/* "materiał" za formularzem: dither ciemniejszy niż border */
+.contact-material {
+  position: relative;
+  z-index: 10;
+  padding: 24px;
+  border: 1px solid color-mix(in oklab, var(--color-border) 60%, transparent);
+}
+.contact-material::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in oklab, var(--color-border) 55%, var(--color-background));
+  -webkit-mask: url("dither.png") repeat 0 0 / 320px 320px;   /* 2 px na kropkę */
+          mask: url("dither.png") repeat 0 0 / 320px 320px;
+  pointer-events: none;
+}
+.contact-material > .contact-form { position: relative; z-index: 1; }
+
+/* desktop: materiał wypełnia prawą kolumnę hero od linii do linii i do prawej krawędzi */
+@media (min-width: 1024px) {
+  .contact-hero { padding-bottom: 0; padding-top: 0; }
+  .contact-hero__text { padding-top: 96px; padding-bottom: 96px; }
+  .contact-material {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: -32px;           /* = lg:px-8 kontenera */
+    padding: 96px 64px;
+    border-width: 0 1px;            /* linie po obu stronach, prawa trafia w kropkę w rogu siatki */
+  }
+  .contact-material > .contact-form { width: 100%; max-width: 560px; }
+}
+.contact-form__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--color-foreground);
+}
+.contact-form__req { color: var(--color-foreground-muted); }
+
+.contact-form__grid { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .contact-form__grid { grid-template-columns: 1fr 1fr; } }
+
+/* każde pole = komórka z linią, jak siatka strony */
+.field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 24px 14px;
+  border-bottom: 1px solid var(--line);
+  cursor: text;
+  transition: background-color 200ms;
+}
+@media (min-width: 640px) { .field:nth-child(odd):not(.field--full) { border-right: 1px solid var(--line); } }
+.field--full { grid-column: 1 / -1; }
+.field:focus-within { background: var(--color-background-secondary); }
+.field:focus-within::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 2px;
+  background: oklch(62% .2 252);
+}
+.field__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--color-foreground-muted);
+}
+.field__input {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--color-foreground);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.field__input--area { min-height: 120px; resize: vertical; }
+.field__error {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: oklch(65% .2 25);
+}
+.field.is-invalid .field__label { color: oklch(65% .2 25); }
+.field.is-invalid .field__error { display: block; }
+
+.contact-form__submit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 72px;
+  padding: 0 24px;
+  border: 0;
+  background: var(--color-foreground);
+  color: var(--color-background);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 200ms, color 200ms;
+}
+.contact-form__submit svg { transition: transform 300ms var(--ease-out); }
+.contact-form__submit:hover { background: var(--color-foreground-muted); }
+.contact-form__submit:focus-visible { outline: 2px solid var(--color-border-blue); outline-offset: -4px; }
+.contact-form__submit:hover svg { transform: translateX(4px); }
+
+.contact-form__done {
+  position: absolute;
+  z-index: 2;
+  inset: 56px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 32px;
+  background: var(--color-background);
+  text-align: center;
+}
+.contact-form__done[hidden] { display: none; }
+.contact-form__done strong { font-size: 24px; font-weight: 500; }
+.contact-form__done p { margin: 0; max-width: 36ch; font-size: 15px; line-height: 1.6; color: var(--color-foreground-muted); }
+.contact-form__done-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: oklch(62% .2 252);
+  color: #fff;
+}
+.contact-form__again {
+  margin-top: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-foreground);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+/* ---------- biura ---------- */
+.offices {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: color-mix(in oklab, var(--color-border) 60%, transparent);
+}
+@media (min-width: 768px)  { .offices { grid-template-columns: repeat(2, minmax(0, 1fr)); } .office:last-child { grid-column: span 2; } }
+@media (min-width: 1024px) {
+  .offices { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .office { grid-column: span 2; }
+  .office:nth-child(n+4) { grid-column: span 3; }
+  .office:last-child { grid-column: span 3; }
+}
+.office {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+  padding: 28px 32px 32px;
+  background: var(--color-background);
+  transition: background-color 300ms var(--ease-out);
+}
+.office:hover { background: var(--color-background-secondary); }
+.office > :not(.office__map-wrap) { position: relative; z-index: 1; }
+
+/* konturowa mapka ulic po prawej: bez etykiet i punktów, zanika do krawędzi */
+.office__map-wrap {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: min(60%, 440px);
+  color: var(--color-foreground);
+  opacity: .32;
+  pointer-events: none;
+  /* zanik od lewej (w stronę tekstu) i od góry; prawa i dolna krawędź docięte ostro */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 50%), linear-gradient(to bottom, transparent 0%, #000 45%);
+  -webkit-mask-composite: source-in;
+          mask-image: linear-gradient(to right, transparent 0%, #000 50%), linear-gradient(to bottom, transparent 0%, #000 45%);
+          mask-composite: intersect;
+  transition: opacity 400ms var(--ease-out), transform 900ms var(--ease-out);
+}
+.office__map-art { display: block; width: 100%; height: 100%; transform: scale(1.5); transform-origin: 50% 50%; }
+.office:hover .office__map-wrap { opacity: .55; transform: scale(1.04); }
+html:not(.dark) .office__map-wrap { opacity: .4; }
+html:not(.dark) .office:hover .office__map-wrap { opacity: .65; }
+.office__top {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--color-foreground-muted);
+}
+.office__city { margin: 32px 0 4px; font-size: 26px; line-height: 1.2; font-weight: 500; letter-spacing: -.01em; color: var(--color-foreground); }
+.office__company { margin: 0 0 12px; font-size: 14px; color: var(--color-foreground); }
+.office__address { margin: 0; font-size: 14px; line-height: 1.6; font-style: normal; color: var(--color-foreground-muted); }
+.office__phone { display: inline-block; margin-top: 8px; font-size: 14px; color: var(--color-foreground); text-decoration: none; }
+.office__phone:hover { text-decoration: underline; text-underline-offset: 4px; }
+.office__map {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 32px;
+  width: max-content;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--color-foreground);
+  text-decoration: none;
+}
+.office__map svg { transition: transform 300ms var(--ease-out); }
+.office__map:hover svg { transform: translate(2px, -2px); }
+.office__map:focus-visible { outline: 2px solid var(--color-border-blue); outline-offset: 4px; }
+
+
+/* =========================================================
+   TRYB EKSPORTU DO FIGMY (?figma=1)
+   Figma nie importuje CSS mask-image ani transform na SVG, więc:
+   - faktura z ditherem = gotowy, pokolorowany PNG jako tło,
+   - zanik mapek = gradient od koloru tła nałożony na mapkę,
+   - przybliżenie mapek = większy rozmiar zamiast transform.
+   ========================================================= */
+.office__fade { display: none; }
+html.figma-export *, html.figma-export *::before, html.figma-export *::after { transition: none !important; animation: none !important; }
+
+/* bez pseudo-elementu: narzędzia przechwytujące stronę często pomijają ::before */
+html.figma-export .contact-material::before { display: none; }
+html.figma-export .contact-material { background: url("dither-dark.png") repeat 0 0 / 320px 320px; }
+html.figma-export:not(.dark) .contact-material { background-image: url("dither-light.png"); }
+
+html.figma-export .office__map-wrap {
+  -webkit-mask-image: none;
+          mask-image: none;
+  overflow: hidden;
+}
+/* mapka jako obrazek SVG z wypalonym kolorem linii (currentColor nie przechodzi do Figmy) */
+.office__map-img { display: none; }
+html.figma-export .office__map-wrap { opacity: 1; }
+html.figma-export .office__map-art { display: none; }
+html.figma-export.dark .office__map-img--dark,
+html.figma-export:not(.dark) .office__map-img--light {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;      /* plik jest już przycięty i ma zanik w środku */
+}
+html.figma-export .office__fade { display: none !important; }
+html.figma-export .office__fade {
+  display: block;
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: min(60%, 440px);
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to right, var(--color-background) 0%, transparent 50%),
+    linear-gradient(to bottom, var(--color-background) 0%, transparent 45%);
+}
+
+
+/* ---------- temat wiadomości (prefill z ?topic=) ---------- */
+.topic { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 16px 24px 18px; border-bottom: 1px solid var(--line); position: relative; z-index: 1; }
+.topic__options { display: flex; flex-wrap: wrap; gap: 8px; }
+.topic__opt { position: relative; cursor: pointer; }
+.topic__opt input { position: absolute; opacity: 0; pointer-events: none; }
+.topic__opt span {
+  display: inline-block;
+  padding: 7px 14px;
+  border: 1px solid color-mix(in oklab, var(--color-border) 80%, transparent);
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--color-foreground-muted);
+  background: var(--color-background);
+  transition: background-color 200ms, color 200ms, border-color 200ms;
+}
+.topic__opt:hover span { color: var(--color-foreground); border-color: var(--color-border-hover); }
+.topic__opt input:checked + span { background: var(--color-foreground); color: var(--color-background); border-color: var(--color-foreground); }
+.topic__opt input:focus-visible + span { outline: 2px solid var(--color-border-blue); outline-offset: 2px; }
+.field__input::placeholder { color: color-mix(in oklab, var(--color-foreground-muted) 70%, transparent); }
+
+
+/* ---------- pin biura na mapce ---------- */
+.office__pin {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: min(60%, 440px);
+  z-index: 2;
+  pointer-events: none;
+}
+.office__pin svg {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -92%);          /* czubek pinu dokładnie w środku = adres */
+  color: var(--color-foreground);
+  fill: var(--color-background);
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / .6));
+  transition: transform 400ms var(--ease-out);
+}
+.office__pin-ring {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 10px; height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 999px;
+  border: 1.5px solid oklch(66% .19 252);
+  opacity: 0;
+  animation: office-ring 2.4s ease-out infinite;
+}
+@keyframes office-ring { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(4.5); opacity: 0; } }
+.office:hover .office__pin svg { transform: translate(-50%, -100%); }
+html:not(.dark) .office__pin svg { filter: drop-shadow(0 2px 6px rgb(0 0 0 / .18)); }
+@media (prefers-reduced-motion: reduce) { .office__pin-ring { animation: none; opacity: .5; } }
+html.figma-export .office__pin-ring { animation: none; opacity: 0; }
+/* pin pozycjonowany względem kafla (nadpisuje regułę .office > * { position: relative }) */
+.office > .office__pin { position: absolute; z-index: 2; }
+
+
+/* ---------- social pod adresem e-mail ---------- */
+.contact-social { display: flex; align-items: center; gap: 16px; margin-top: 4px; }
+.contact-social__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-foreground-muted); }
+.contact-social__links { display: flex; gap: 8px; }
+.contact-social__links a { width: 40px; height: 40px; }
+/* piny statyczne: bez pulsowania i bez ruchu po najechaniu */
+.office__pin-ring { display: none !important; }
+.office:hover .office__pin svg { transform: translate(-50%, -92%); }
+.office__pin svg { transition: none; }
+
+/* desktop: dół ikon social media w jednej linii z dolną krawędzią przycisku "Send message".
+   Tekst i formularz zaczynają się na tej samej wysokości (96 px), oba kończą 96 px nad dołem hero. */
+@media (min-width: 1024px) {
+  .contact-material { align-items: flex-start; }
+  .contact-hero__text { align-self: stretch; display: flex; flex-direction: column; }
+  .contact-social { margin-top: auto; }
+}
+
+/* ---------- mobile/tablet: równe marginesy, e-mail na szerokość tekstu ---------- */
+@media (max-width: 1023px) {
+  .contact-hero { padding-left: 20px; padding-right: 20px; gap: 40px; }
+  .contact-hero__text { gap: 20px; }
+  .contact-mail { width: 100%; margin-top: 4px; }
+  .contact-mail__link { flex: 1; min-width: 0; }
+  .contact-social { margin-top: 0; }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .contact-hero { padding-left: 24px; padding-right: 24px; }
+}
+@media (max-width: 479px) {
+  .contact-mail { padding-left: 16px; gap: 12px; }
+  .contact-mail__label { display: none; }       /* przy wąskim ekranie adres mieści się w całości */
+  .contact-mail__link { font-size: 17px; }
+  .contact-material { padding: 16px; }
+}

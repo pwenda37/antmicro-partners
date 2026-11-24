@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!--12qhfyh--><link rel="icon" href="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='107'%20height='128'%20viewBox='0%200%20107%20128'%3e%3ctitle%3esvelte-logo%3c/title%3e%3cpath%20d='M94.157%2022.819c-10.4-14.885-30.94-19.297-45.792-9.835L22.282%2029.608A29.92%2029.92%200%200%200%208.764%2049.65a31.5%2031.5%200%200%200%203.108%2020.231%2030%2030%200%200%200-4.477%2011.183%2031.9%2031.9%200%200%200%205.448%2024.116c10.402%2014.887%2030.942%2019.297%2045.791%209.835l26.083-16.624A29.92%2029.92%200%200%200%2098.235%2078.35a31.53%2031.53%200%200%200-3.105-20.232%2030%2030%200%200%200%204.474-11.182%2031.88%2031.88%200%200%200-5.447-24.116'%20style='fill:%23ff3e00'/%3e%3cpath%20d='M45.817%20106.582a20.72%2020.72%200%200%201-22.237-8.243%2019.17%2019.17%200%200%201-3.277-14.503%2018%2018%200%200%201%20.624-2.435l.49-1.498%201.337.981a33.6%2033.6%200%200%200%2010.203%205.098l.97.294-.09.968a5.85%205.85%200%200%200%201.052%203.878%206.24%206.24%200%200%200%206.695%202.485%205.8%205.8%200%200%200%201.603-.704L69.27%2076.28a5.43%205.43%200%200%200%202.45-3.631%205.8%205.8%200%200%200-.987-4.371%206.24%206.24%200%200%200-6.698-2.487%205.7%205.7%200%200%200-1.6.704l-9.953%206.345a19%2019%200%200%201-5.296%202.326%2020.72%2020.72%200%200%201-22.237-8.243%2019.17%2019.17%200%200%201-3.277-14.502%2017.99%2017.99%200%200%201%208.13-12.052l26.081-16.623a19%2019%200%200%201%205.3-2.329%2020.72%2020.72%200%200%201%2022.237%208.243%2019.17%2019.17%200%200%201%203.277%2014.503%2018%2018%200%200%201-.624%202.435l-.49%201.498-1.337-.98a33.6%2033.6%200%200%200-10.203-5.1l-.97-.294.09-.968a5.86%205.86%200%200%200-1.052-3.878%206.24%206.24%200%200%200-6.696-2.485%205.8%205.8%200%200%200-1.602.704L37.73%2051.72a5.42%205.42%200%200%200-2.449%203.63%205.79%205.79%200%200%200%20.986%204.372%206.24%206.24%200%200%200%206.698%202.486%205.8%205.8%200%200%200%201.602-.704l9.952-6.342a19%2019%200%200%201%205.295-2.328%2020.72%2020.72%200%200%201%2022.237%208.242%2019.17%2019.17%200%200%201%203.277%2014.503%2018%2018%200%200%201-8.13%2012.053l-26.081%2016.622a19%2019%200%200%201-5.3%202.328'%20style='fill:%23fff'/%3e%3c/svg%3e" media="(prefers-color-scheme: light)"/> <link rel="icon" href="../_app/immutable/assets/favicon-dark.BvAdDvN6.svg" media="(prefers-color-scheme: dark)"/> <meta name="description" content="Open source simulation framework for developing, testing and debugging complex embedded systems."/> <link rel="canonical" href="https://www.antmicro.com/platforms/renode/"/> <meta property="og:title" content="Renode | Antmicro"/> <meta property="og:description" content="Open source simulation framework for developing, testing and debugging complex embedded systems."/> <meta property="og:type" content="website"/> <meta property="og:url" content="https://www.antmicro.com/platforms/renode/"/> <!--[-1--><!--]--> <meta name="twitter:card" content="summary_large_image"/><!----><!--1funsus--><!--[-1--><!--]--> <!----><script>(function setInitialMode({ defaultMode = "system", themeColors: themeColors2, darkClassNames: darkClassNames2 = ["dark"], lightClassNames: lightClassNames2 = [], defaultTheme = "", modeStorageKey: modeStorageKey2 = "mode-watcher-mode", themeStorageKey: themeStorageKey2 = "mode-watcher-theme" }) {
+  const rootEl = document.documentElement;
+  const mode = localStorage.getItem(modeStorageKey2) ?? defaultMode;
+  const theme = localStorage.getItem(themeStorageKey2) ?? defaultTheme;
+  const light = mode === "light" || mode === "system" && window.matchMedia("(prefers-color-scheme: light)").matches;
+  if (light) {
+    if (darkClassNames2.length)
+      rootEl.classList.remove(...darkClassNames2.filter(Boolean));
+    if (lightClassNames2.length)
+      rootEl.classList.add(...lightClassNames2.filter(Boolean));
+  } else {
+    if (lightClassNames2.length)
+      rootEl.classList.remove(...lightClassNames2.filter(Boolean));
+    if (darkClassNames2.length)
+      rootEl.classList.add(...darkClassNames2.filter(Boolean));
+  }
+  rootEl.style.colorScheme = light ? "light" : "dark";
+  if (themeColors2) {
+    const themeMetaEl = document.querySelector('meta[name="theme-color"]');
+    if (themeMetaEl) {
+      themeMetaEl.setAttribute("content", mode === "light" ? themeColors2.light : themeColors2.dark);
+    }
+  }
+  if (theme) {
+    rootEl.setAttribute("data-theme", theme);
+    localStorage.setItem(themeStorageKey2, theme);
+  }
+  localStorage.setItem(modeStorageKey2, mode);
+})({"defaultMode":"system","darkClassNames":["dark"],"lightClassNames":[],"defaultTheme":"","modeStorageKey":"mode-watcher-mode","themeStorageKey":"mode-watcher-theme"});</script><!----><!----><title>Partners | Antmicro</title>
+		<link href="../_app/immutable/assets/0.BKdQazkX.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/shield-check.kRRuk8Qc.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/6.CSg0GIJq.css" rel="stylesheet">
+	<link rel="stylesheet" href="partners.css?v=1795512431">
+</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents"><!--[--><!--[0--><!--[--><!--[-1--><!--]--><!----> <header class="fixed top-0 z-450 w-full bg-background/95 px-3"><div class="relative mx-auto w-full max-w-7xl min-w-0 border-x border-border/60"><nav class="relative flex h-18 items-center justify-start px-4 sm:px-6" aria-label="Main navigation"><a href="https://antmicro.com/" class="shrink-0 text-foreground transition-colors hover:text-foreground-muted" aria-label="Go to Antmicro homepage"><svg viewBox="0 0 1154 550" fill="none" xmlns="http://www.w3.org/2000/svg" class="block h-16 w-auto dark:hidden" width="100%" height="100%" role="presentation" aria-hidden="true"><path d="M455.749 323.688C433.629 323.688 420.598 314.079 420.598 295.737C420.598 273.452 442.554 264.883 472.367 261.981V256.314C472.367 243.639 465.523 237.972 452.656 237.972C444.607 237.972 435.846 240.381 429.522 243.803L425.909 234.55C433.629 230.58 444.087 227.87 454.024 227.87C474.091 227.87 486.438 237.288 486.438 257.875V317.172C479.074 321.115 468.096 323.688 455.749 323.688ZM472.367 269.838C448.878 272.576 434.998 279.092 434.998 295.381C434.998 307.892 442.718 314.928 457.118 314.928C462.949 314.928 468.78 313.723 472.367 311.834V269.838Z" fill="#332D37"></path><path d="M558.82 321.963V258.203C558.82 244.323 553.153 237.452 538.069 237.452C531.718 237.452 526.571 238.492 521.78 240.546V321.963H506.695V234.358C515.264 230.416 526.571 227.843 538.069 227.843C562.927 227.843 573.905 238.629 573.905 258.176V321.963H558.82Z" fill="#332D37"></path><path d="M616.778 322.84C603.582 322.84 594.657 314.791 594.657 299.515V239.013H584.035V229.568H594.657V208.324L609.742 203.67V229.568H625.867V239.013H609.742V299.515C609.742 307.564 613.684 312.382 621.24 312.382C622.965 312.382 624.498 312.218 625.867 311.698V321.307C623.457 322.32 620.364 322.84 616.778 322.84Z" fill="#332D37"></path><path d="M743.613 321.963V257.519C743.613 245.336 738.137 237.452 724.586 237.452C717.03 237.452 711.035 240.874 706.6 246.212V321.963H691.679V255.11C691.679 244.488 685.848 237.425 672.16 237.425C665.124 237.425 659.977 238.301 654.83 240.518V321.963H639.91V234.358C648.835 230.416 659.101 227.843 671.612 227.843C685.492 227.843 693.377 231.621 699.372 238.629C705.532 231.949 714.977 227.843 725.955 227.843C748.595 227.843 758.533 240.025 758.533 257.656V321.963H743.613Z" fill="#332D37"></path><path d="M778.957 321.964V289.14V260.613V229.568H787.115H794.042V253.085V275.451V321.964H786.65H778.957Z" fill="#332D37"></path><path d="M843.922 323.688C821.637 323.688 808.086 303.95 808.086 275.67C808.086 247.39 821.802 227.843 843.922 227.843C852.491 227.843 859.691 230.06 864.673 233.838L861.087 242.763C857.473 240.025 851.998 238.109 846.495 238.109C831.767 238.109 823.526 254.07 823.526 275.314C823.526 296.229 831.931 312.683 846.495 312.683C851.998 312.683 857.309 310.958 860.895 308.248L864.673 317.665C859.663 321.471 852.491 323.688 843.922 323.688Z" fill="#332D37"></path><path d="M915.376 239.697C912.638 238.657 909.38 238.136 905.958 238.136C901.851 238.136 897.553 238.821 894.295 240.546V321.963H879.211V234.358C887.095 230.416 897.553 227.843 910.749 227.843C914.198 227.843 917.949 228.171 918.798 228.336L915.376 239.697Z" fill="#332D37"></path><path d="M957.481 323.688C932.459 323.688 920.961 303.457 920.961 275.67C920.961 248.074 932.432 227.843 957.481 227.843C982.504 227.843 994.002 248.074 994.002 275.67C993.974 303.457 982.504 323.688 957.481 323.688ZM957.481 237.452C941.384 237.452 936.045 254.781 936.045 275.341C936.045 295.901 941.384 313.559 957.481 313.559C973.606 313.559 978.917 295.901 978.917 275.341C978.917 254.781 973.579 237.452 957.481 237.452Z" fill="#332D37"></path><path d="M277.748 277.094H303.29C304.139 280.242 307.041 282.514 310.491 282.514C314.624 282.514 317.964 279.284 317.964 275.15C317.964 271.016 314.624 267.539 310.491 267.539C307.014 267.539 304.112 270.003 303.29 273.234H277.748V262.283H289.63C289.63 262.283 290.615 262.393 291.217 261.927C292.285 261.106 295.023 258.45 295.023 258.45L302.524 250.949C303.564 251.497 304.714 251.825 305.973 251.825C310.107 251.825 313.475 248.458 313.475 244.324C313.475 240.19 310.135 236.823 305.973 236.823C301.84 236.823 298.5 240.163 298.5 244.324C298.5 245.802 298.938 247.171 299.677 248.348L290.944 257.109C290.944 257.109 289.849 258.149 289.438 258.313C289.192 258.423 288.535 258.423 288.535 258.423H277.83V253.742V241.751C282.731 240.847 286.427 236.549 286.427 231.402C286.427 225.571 281.69 220.862 275.887 220.862C270.055 220.862 265.347 225.571 265.347 231.402C265.347 236.549 269.07 240.847 273.97 241.751V258.45C273.97 258.45 262.609 258.45 262.335 258.341C261.897 258.177 260.829 257.136 260.829 257.136L252.069 248.376C252.808 247.226 253.246 245.857 253.246 244.351C253.246 240.218 249.906 236.85 245.745 236.85C241.611 236.85 238.244 240.19 238.244 244.351C238.244 248.485 241.584 251.853 245.745 251.853C247.004 251.853 248.154 251.524 249.194 250.977L256.696 258.478C256.696 258.478 259.406 261.133 260.474 261.955C261.076 262.42 262.061 262.31 262.061 262.31H273.943V273.261H248.4C247.552 270.031 244.677 267.567 241.2 267.567C237.067 267.567 233.699 271.044 233.699 275.177C233.699 279.311 237.039 282.542 241.2 282.542C244.65 282.542 247.552 280.269 248.4 277.121H273.943V287.798H262.061C262.061 287.798 261.076 287.689 260.474 288.154C259.406 289.003 256.696 291.631 256.696 291.631L249.194 299.132C248.154 298.584 247.004 298.256 245.745 298.256C241.611 298.256 238.244 301.623 238.244 305.757C238.244 309.891 241.584 313.258 245.745 313.258C249.879 313.258 253.246 309.918 253.246 305.757C253.246 304.279 252.808 302.91 252.069 301.733L260.829 292.972C260.829 292.972 261.897 291.932 262.335 291.74C262.582 291.631 263.239 291.631 263.239 291.631H273.97V308.33C269.07 309.234 265.347 313.532 265.347 318.679C265.347 324.483 270.083 329.219 275.887 329.219C281.69 329.219 286.427 324.483 286.427 318.679C286.427 313.532 282.703 309.234 277.83 308.33V291.631H288.535C288.535 291.631 289.192 291.631 289.438 291.74C289.876 291.905 290.944 292.972 290.944 292.972L299.677 301.733C298.938 302.883 298.5 304.279 298.5 305.757C298.5 309.891 301.84 313.258 305.973 313.258C310.107 313.258 313.475 309.918 313.475 305.757C313.475 301.623 310.135 298.256 305.973 298.256C304.714 298.256 303.564 298.584 302.524 299.132L295.023 291.631C295.023 291.631 292.285 288.975 291.217 288.154C290.615 287.689 289.63 287.798 289.63 287.798H277.748V281.419V277.094ZM310.491 271.372C312.516 271.372 314.159 273.015 314.159 275.041C314.159 277.066 312.516 278.709 310.491 278.709C308.465 278.709 306.822 277.066 306.822 275.041C306.822 273.015 308.492 271.372 310.491 271.372ZM305.946 240.683C307.972 240.683 309.614 242.326 309.614 244.351C309.614 246.377 307.972 248.02 305.946 248.02C303.92 248.02 302.278 246.377 302.278 244.351C302.278 242.326 303.92 240.683 305.946 240.683ZM245.69 247.992C243.664 247.992 242.022 246.35 242.022 244.324C242.022 242.298 243.664 240.656 245.69 240.656C247.716 240.656 249.359 242.298 249.359 244.324C249.359 246.35 247.716 247.992 245.69 247.992ZM241.118 278.682C239.092 278.682 237.45 277.039 237.45 275.013C237.45 272.987 239.092 271.345 241.118 271.345C243.144 271.345 244.787 272.987 244.787 275.013C244.787 277.039 243.144 278.682 241.118 278.682ZM245.69 309.371C243.664 309.371 242.022 307.728 242.022 305.702C242.022 303.676 243.664 302.034 245.69 302.034C247.716 302.034 249.359 303.676 249.359 305.702C249.359 307.728 247.716 309.371 245.69 309.371ZM305.946 302.034C307.972 302.034 309.614 303.676 309.614 305.702C309.614 307.728 307.972 309.371 305.946 309.371C303.92 309.371 302.278 307.728 302.278 305.702C302.278 303.676 303.92 302.034 305.946 302.034ZM275.832 325.304C272.163 325.304 269.179 322.32 269.179 318.651C269.179 314.983 272.163 311.999 275.832 311.999C279.5 311.999 282.484 314.983 282.484 318.651C282.484 322.32 279.5 325.304 275.832 325.304ZM275.832 224.722C279.5 224.722 282.484 227.706 282.484 231.375C282.484 235.043 279.5 238.027 275.832 238.027C272.163 238.027 269.179 235.043 269.179 231.375C269.152 227.706 272.163 224.722 275.832 224.722Z" fill="#332D37"></path><path d="M278.842 361.414C262.005 370.75 245.579 377.84 225.841 377.84C223.952 377.84 222.09 377.785 220.228 377.676L166.926 346.959C162.628 344.495 160 339.924 160 334.968V285.608C172.894 304.58 198.793 319.008 204.241 321.91L271.998 360.976C274.106 362.181 276.624 362.318 278.842 361.414Z" fill="url(#paint0_linear_3_624)"></path><path d="M351.661 316.051C350.922 351.339 331.841 376.252 330.609 378.168L282.727 405.764C278.457 408.255 273.173 408.255 268.902 405.764L220.227 377.675C222.088 377.785 223.95 377.84 225.839 377.84C245.577 377.84 262.003 370.749 278.84 361.414C279.168 361.304 279.469 361.14 279.771 360.976L347.829 321.718C348.157 321.526 350.074 320.458 351.114 317.995C351.388 317.392 351.579 316.735 351.661 316.051Z" fill="url(#paint1_linear_3_624)"></path><path d="M391.634 334.995C391.634 339.923 389.006 344.523 384.708 346.986L330.612 378.168C331.843 376.252 350.925 351.339 351.664 316.051C351.691 315.722 351.719 315.366 351.719 315.011L351.637 235.892V235.126C351.691 232.306 350.213 229.705 347.777 228.282L279.773 188.969C278.569 188.284 277.227 187.929 275.886 187.929C275.475 187.929 275.064 187.956 274.681 188.038C274.298 188.093 273.942 188.175 273.586 188.312C273.531 188.312 273.504 188.312 273.449 188.339C281.471 184.315 306.767 172.762 326.313 172.954C328.504 172.981 330.694 173.063 332.856 173.2L384.598 203.123C388.951 205.641 391.579 210.295 391.497 215.305L391.634 334.995Z" fill="#322E35"></path><path d="M332.855 173.2C330.692 173.063 328.502 172.981 326.312 172.954C306.765 172.762 281.469 184.315 273.448 188.339C273.284 188.394 273.092 188.449 272.928 188.531C272.599 188.64 272.298 188.805 271.997 188.969L203.911 228.391C203.638 228.555 203.364 228.72 203.118 228.939C202.597 229.322 202.132 229.76 201.749 230.28C201.721 230.308 201.694 230.362 201.639 230.417C201.146 231.074 200.763 231.786 200.517 232.552C200.489 232.662 200.517 232.552 200.435 232.799C199.86 228.528 199.586 224.175 199.586 219.768C199.586 205.504 202.46 191.98 207.607 179.716L268.876 144.236C273.174 141.744 278.458 141.744 282.756 144.236L332.855 173.2Z" fill="url(#paint2_linear_3_624)"></path><path d="M203.939 321.718L204.241 321.91C198.793 319.008 172.894 304.58 160 285.608V215.278C160 210.323 162.628 205.778 166.899 203.287L207.608 179.716C202.461 191.981 199.587 205.505 199.587 219.768C199.587 224.175 199.86 228.528 200.435 232.799C200.189 233.538 200.052 234.305 200.052 235.126V314.983C200.052 317.776 201.53 320.322 203.939 321.718Z" fill="url(#paint3_linear_3_624)"></path><defs><linearGradient id="paint0_linear_3_624" x1="265.297" y1="397.026" x2="151.559" y2="283.08" gradientUnits="userSpaceOnUse"><stop stop-color="#292B2F"></stop><stop offset="0.0235" stop-color="#3A3E43"></stop><stop offset="0.0755" stop-color="#596369"></stop><stop offset="0.1331" stop-color="#75828A"></stop><stop offset="0.1951" stop-color="#8A9CA6"></stop><stop offset="0.2629" stop-color="#9CB3BC"></stop><stop offset="0.3384" stop-color="#AAC4CE"></stop><stop offset="0.425" stop-color="#B4D2DD"></stop><stop offset="0.5293" stop-color="#BCDDE8"></stop><stop offset="0.6697" stop-color="#C0E3ED"></stop><stop offset="1" stop-color="#C1E4EF"></stop></linearGradient><linearGradient id="paint1_linear_3_624" x1="220.227" y1="361.849" x2="351.661" y2="361.849" gradientUnits="userSpaceOnUse"><stop stop-color="#93292C"></stop><stop offset="0.0372" stop-color="#9F2D2F"></stop><stop offset="0.1348" stop-color="#B93733"></stop><stop offset="0.2479" stop-color="#CE3C36"></stop><stop offset="0.3843" stop-color="#DF4139"></stop><stop offset="0.5679" stop-color="#E7463C"></stop><stop offset="1" stop-color="#E9473C"></stop></linearGradient><linearGradient id="paint2_linear_3_624" x1="305.932" y1="155.953" x2="178.883" y2="225.381" gradientUnits="userSpaceOnUse"><stop stop-color="#292B2F"></stop><stop offset="0.0235" stop-color="#3A3E43"></stop><stop offset="0.0755" stop-color="#596369"></stop><stop offset="0.1331" stop-color="#75828A"></stop><stop offset="0.1951" stop-color="#8A9CA6"></stop><stop offset="0.2629" stop-color="#9CB3BC"></stop><stop offset="0.3384" stop-color="#AAC4CE"></stop><stop offset="0.425" stop-color="#B4D2DD"></stop><stop offset="0.5293" stop-color="#BCDDE8"></stop><stop offset="0.6697" stop-color="#C0E3ED"></stop><stop offset="1" stop-color="#C1E4EF"></stop></linearGradient><linearGradient id="paint3_linear_3_624" x1="183.804" y1="327.825" x2="183.804" y2="206.968" gradientUnits="userSpaceOnUse"><stop stop-color="#292B2F"></stop><stop offset="0.0235" stop-color="#3A3E43"></stop><stop offset="0.0755" stop-color="#596369"></stop><stop offset="0.1331" stop-color="#75828A"></stop><stop offset="0.1951" stop-color="#8A9CA6"></stop><stop offset="0.2629" stop-color="#9CB3BC"></stop><stop offset="0.3384" stop-color="#AAC4CE"></stop><stop offset="0.425" stop-color="#B4D2DD"></stop><stop offset="0.5293" stop-color="#BCDDE8"></stop><stop offset="0.6697" stop-color="#C0E3ED"></stop><stop offset="1" stop-color="#C1E4EF"></stop></linearGradient></defs></svg><!----> <svg viewBox="0 0 1154 550" fill="none" xmlns="http://www.w3.org/2000/svg" class="hidden h-16 w-auto dark:block" width="100%" height="100%" role="presentation" aria-hidden="true"><path d="M268.877 144.235C273.175 141.744 278.459 141.744 282.757 144.235L384.598 203.123C388.95 205.642 391.578 210.296 391.496 215.306L391.633 334.996C391.633 339.924 389.005 344.522 384.707 346.986L282.729 405.765C278.459 408.256 273.175 408.256 268.904 405.765L166.927 346.959C162.629 344.495 160 339.924 160 334.969V215.278C160 210.323 162.628 205.778 166.898 203.287L268.877 144.235ZM279.772 188.969C277.364 187.573 274.407 187.573 271.998 188.969L203.912 228.392C201.53 229.788 200.052 232.334 200.052 235.126V314.983C200.052 317.776 201.53 320.322 203.939 321.718L271.998 360.977C274.407 362.345 277.364 362.345 279.772 360.977L347.831 321.718C350.24 320.349 351.718 317.776 351.718 315.011L351.636 235.893V235.126C351.69 232.306 350.213 229.706 347.776 228.282L279.772 188.969ZM275.883 220.862C281.687 220.862 286.423 225.571 286.423 231.402C286.423 236.549 282.727 240.848 277.826 241.751V258.423H288.53C288.53 258.423 289.187 258.423 289.434 258.313C289.84 258.151 290.919 257.129 290.939 257.109L299.673 248.349C298.934 247.171 298.496 245.803 298.496 244.324C298.496 240.163 301.836 236.823 305.97 236.823C310.131 236.823 313.471 240.19 313.471 244.324C313.471 248.458 310.103 251.825 305.97 251.825C304.711 251.825 303.561 251.497 302.521 250.949L295.019 258.45C295.019 258.45 292.282 261.106 291.214 261.928C290.618 262.388 289.646 262.285 289.626 262.283H277.744V273.233H303.286C304.108 270.003 307.01 267.539 310.486 267.539C314.62 267.539 317.96 271.017 317.96 275.15C317.96 279.284 314.62 282.515 310.486 282.515C307.037 282.515 304.135 280.242 303.286 277.094H277.744V287.798H289.626C289.647 287.796 290.618 287.694 291.214 288.154C292.277 288.972 294.993 291.606 295.019 291.631L302.521 299.132C303.561 298.584 304.711 298.256 305.97 298.256C310.131 298.256 313.47 301.623 313.471 305.757C313.471 309.918 310.103 313.259 305.97 313.259C301.836 313.259 298.496 309.891 298.496 305.757C298.496 304.279 298.934 302.882 299.673 301.732L290.939 292.973C290.939 292.973 289.872 291.904 289.434 291.74C289.187 291.631 288.53 291.631 288.53 291.631H277.826V308.331C282.699 309.234 286.423 313.532 286.423 318.679C286.423 324.482 281.687 329.219 275.883 329.219C270.079 329.219 265.343 324.483 265.343 318.679C265.343 313.532 269.066 309.235 273.966 308.331V291.631H263.234C263.22 291.631 262.575 291.632 262.331 291.74C261.893 291.932 260.825 292.973 260.825 292.973L252.065 301.732C252.805 302.91 253.242 304.279 253.242 305.757C253.242 309.918 249.875 313.259 245.741 313.259C241.58 313.259 238.24 309.891 238.24 305.757C238.24 301.623 241.607 298.256 245.741 298.256C247 298.256 248.15 298.584 249.19 299.132L256.691 291.631C256.691 291.631 259.402 289.003 260.47 288.154C261.072 287.689 262.058 287.798 262.058 287.798H273.938V277.121H248.396C247.548 280.269 244.646 282.542 241.196 282.542C237.035 282.542 233.695 279.311 233.695 275.178C233.695 271.044 237.063 267.567 241.196 267.567C244.673 267.567 247.548 270.031 248.396 273.262H273.938V262.311H262.058C262.058 262.311 261.072 262.42 260.47 261.955C259.402 261.134 256.691 258.478 256.691 258.478L249.19 250.977C248.15 251.524 247 251.853 245.741 251.853C241.58 251.853 238.24 248.485 238.24 244.352C238.24 240.19 241.607 236.851 245.741 236.851C249.902 236.851 253.242 240.218 253.242 244.352C253.242 245.857 252.805 247.226 252.065 248.376L260.825 257.137C260.825 257.137 261.893 258.176 262.331 258.341C262.604 258.45 273.885 258.45 273.966 258.45V241.751C269.066 240.847 265.343 236.549 265.343 231.402C265.343 225.571 270.052 220.862 275.883 220.862ZM275.828 311.999C272.16 311.999 269.176 314.983 269.176 318.651C269.176 322.32 272.16 325.304 275.828 325.304C279.496 325.304 282.48 322.32 282.48 318.651C282.48 314.983 279.496 311.999 275.828 311.999ZM454.024 227.871C474.091 227.871 486.438 237.289 486.438 257.876V317.174C479.074 321.116 468.096 323.689 455.749 323.689C433.629 323.689 420.598 314.08 420.598 295.738C420.598 273.454 442.554 264.884 472.367 261.982V256.315C472.367 243.64 465.522 237.974 452.655 237.974C444.607 237.974 435.846 240.383 429.522 243.805L425.909 234.551C433.629 230.581 444.087 227.871 454.024 227.871ZM843.922 227.844C852.491 227.844 859.69 230.062 864.673 233.84L861.087 242.764C857.473 240.026 851.998 238.11 846.495 238.11C831.767 238.11 823.526 254.071 823.526 275.314C823.526 296.23 831.931 312.683 846.495 312.684C851.998 312.684 857.309 310.959 860.896 308.249L864.673 317.666C859.663 321.471 852.491 323.689 843.922 323.689C821.637 323.689 808.086 303.951 808.086 275.671C808.086 247.391 821.802 227.844 843.922 227.844ZM957.478 227.844C982.5 227.844 993.998 248.075 993.998 275.671C993.971 303.458 982.5 323.689 957.478 323.689C932.455 323.689 920.957 303.458 920.957 275.671C920.957 248.075 932.428 227.844 957.478 227.844ZM609.742 229.568H625.866V239.014H609.742V299.516C609.742 307.564 613.684 312.383 621.24 312.383C622.965 312.383 624.498 312.218 625.866 311.698V321.308C623.457 322.32 620.363 322.84 616.777 322.84C603.582 322.84 594.657 314.792 594.657 299.516V239.014H584.035V229.568H594.657V208.324L609.742 203.67V229.568ZM538.069 227.844C562.927 227.844 573.904 238.63 573.904 258.177V321.965H558.82V258.204C558.82 244.325 553.153 237.453 538.069 237.453C531.718 237.453 526.57 238.494 521.779 240.547V321.965H506.695V234.359C515.264 230.417 526.571 227.844 538.069 227.844ZM725.955 227.844C748.595 227.844 758.533 240.027 758.533 257.657V321.965H743.612V257.521C743.612 245.338 738.137 237.453 724.586 237.453C717.03 237.453 711.035 240.875 706.6 246.214V321.965H691.68V255.111C691.68 244.489 685.848 237.426 672.16 237.426C665.124 237.426 659.977 238.302 654.83 240.52V321.965H639.91V234.359C648.835 230.417 659.101 227.844 671.612 227.844C685.492 227.844 693.377 231.622 699.372 238.63C705.532 231.95 714.977 227.844 725.955 227.844ZM794.042 321.965H778.957V229.568H794.042V321.965ZM910.749 227.844C914.198 227.844 917.949 228.173 918.798 228.337L915.376 239.698C912.638 238.658 909.38 238.138 905.958 238.138C901.852 238.138 897.554 238.822 894.296 240.547V321.965H879.211V234.359C887.095 230.417 897.554 227.844 910.749 227.844ZM472.367 269.84C448.878 272.577 434.998 279.093 434.998 295.382C434.998 307.893 442.718 314.929 457.118 314.929C462.949 314.929 468.781 313.724 472.367 311.835V269.84ZM957.478 237.453C941.38 237.453 936.042 254.782 936.042 275.342C936.042 295.902 941.38 313.56 957.478 313.56C973.602 313.559 978.913 295.902 978.913 275.342C978.913 254.782 973.575 237.453 957.478 237.453ZM245.687 302.034C243.661 302.034 242.018 303.676 242.018 305.702C242.018 307.728 243.661 309.371 245.687 309.371C247.712 309.371 249.354 307.728 249.354 305.702C249.354 303.677 247.712 302.034 245.687 302.034ZM305.942 302.034C303.917 302.034 302.274 303.676 302.273 305.702C302.273 307.728 303.917 309.371 305.942 309.371C307.968 309.371 309.61 307.728 309.61 305.702C309.61 303.677 307.968 302.034 305.942 302.034ZM310.486 271.372C308.488 271.372 306.818 273.015 306.818 275.041C306.819 277.067 308.461 278.709 310.486 278.709C312.512 278.709 314.155 277.067 314.155 275.041C314.155 273.015 312.512 271.372 310.486 271.372ZM241.114 271.345C239.088 271.345 237.446 272.988 237.446 275.014C237.446 277.039 239.089 278.682 241.114 278.682C243.14 278.682 244.783 277.039 244.783 275.014C244.783 272.988 243.14 271.345 241.114 271.345ZM305.942 240.684C303.917 240.684 302.273 242.326 302.273 244.352C302.273 246.377 303.917 248.021 305.942 248.021C307.968 248.02 309.61 246.377 309.61 244.352C309.61 242.326 307.968 240.684 305.942 240.684ZM245.687 240.655C243.661 240.655 242.018 242.298 242.018 244.324C242.018 246.35 243.661 247.992 245.687 247.992C247.712 247.992 249.354 246.35 249.354 244.324C249.354 242.298 247.712 240.655 245.687 240.655ZM275.828 224.723C272.16 224.723 269.148 227.707 269.176 231.375C269.176 235.043 272.16 238.027 275.828 238.027C279.496 238.027 282.48 235.043 282.48 231.375C282.48 227.707 279.496 224.723 275.828 224.723Z" fill="white"></path></svg><!----></a> <!--[--><!--$s1--><!--[-1--><nav aria-label="main" class="relative hidden lg:ml-8 lg:flex" id="bits-s1" data-orientation="horizontal" dir="ltr" data-navigation-menu-root="" data-navigation-menu-menu=""><!--[--><!--$s2--><!--[-1--><div id="bits-13"><ul class="flex items-center gap-2" id="bits-s2" data-orientation="horizontal" data-navigation-menu-list=""><!--[--><!--[--><!--$s3--><!--[-1--><li id="bits-s3" data-navigation-menu-item=""><!--[--><!--$s4--><!--[-1--><button class="inline-flex items-center gap-2 rounded-lg border border-transparent px-3 py-1.5 text-sm font-medium text-foreground-muted transition-colors hover:bg-surface hover:text-foreground data-[state=open]:bg-surface-hover data-[state=open]:text-foreground" id="bits-s4" data-state="closed" data-value="bits-s3" aria-expanded="false" data-navigation-menu-trigger="" tabindex="0"><!---->Areas <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide lucide-chevron-down transition-transform data-[state=open]:rotate-180"><!--[--><!----><path d="m6 9 6 6 6-6"><!----></path><!----><!--]--><!----><!----></svg><!----><!----></button><!--]--> <!--[-1--><!--]--><!--]--> <!--[--><!--$s5--><!--[0--><!--[-1--><!--]--><!----><!--]--><!--]--><!----></li><!--]--><!--]--><!--[--><!--$s6--><!--[-1--><li id="bits-s6" data-navigation-menu-item=""><!--[--><!--$s7--><!--[-1--><button class="inline-flex items-center gap-2 rounded-lg border border-transparent px-3 py-1.5 text-sm font-medium text-foreground-muted transition-colors hover:bg-surface hover:text-foreground data-[state=open]:bg-surface-hover data-[state=open]:text-foreground" id="bits-s7" data-state="closed" data-value="bits-s6" aria-expanded="false" data-navigation-menu-trigger="" tabindex="0"><!---->Technologies <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide lucide-chevron-down transition-transform data-[state=open]:rotate-180"><!--[--><!----><path d="m6 9 6 6 6-6"><!----></path><!----><!--]--><!----><!----></svg><!----><!----></button><!--]--> <!--[-1--><!--]--><!--]--> <!--[--><!--$s8--><!--[0--><!--[-1--><!--]--><!----><!--]--><!--]--><!----></li><!--]--><!--]--><!--[--><!--$s9--><!--[-1--><li id="bits-s9" data-navigation-menu-item=""><!--[--><!--$s10--><!--[-1--><button class="inline-flex items-center gap-2 rounded-lg border border-transparent px-3 py-1.5 text-sm font-medium text-foreground-muted transition-colors hover:bg-surface hover:text-foreground data-[state=open]:bg-surface-hover data-[state=open]:text-foreground" id="bits-s10" data-state="closed" data-value="bits-s9" aria-expanded="false" data-navigation-menu-trigger="" tabindex="0"><!---->Services <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide lucide-chevron-down transition-transform data-[state=open]:rotate-180"><!--[--><!----><path d="m6 9 6 6 6-6"><!----></path><!----><!--]--><!----><!----></svg><!----><!----></button><!--]--> <!--[-1--><!--]--><!--]--> <!--[--><!--$s11--><!--[0--><!--[-1--><!--]--><!----><!--]--><!--]--><!----></li><!--]--><!--]--><!--[--><!--$s12--><!--[-1--><li id="bits-s12" data-navigation-menu-item=""><!--[--><!--$s13--><!--[-1--><button class="inline-flex items-center gap-2 rounded-lg border border-transparent px-3 py-1.5 text-sm font-medium text-foreground-muted transition-colors hover:bg-surface hover:text-foreground data-[state=open]:bg-surface-hover data-[state=open]:text-foreground" id="bits-s13" data-state="closed" data-value="bits-s12" aria-expanded="false" data-navigation-menu-trigger="" tabindex="0"><!---->Platforms <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide lucide-chevron-down transition-transform data-[state=open]:rotate-180"><!--[--><!----><path d="m6 9 6 6 6-6"><!----></path><!----><!--]--><!----><!----></svg><!----><!----></button><!--]--> <!--[-1--><!--]--><!--]--> <!--[--><!--$s14--><!--[0--><!--[-1--><!--]--><!----><!--]--><!--]--><!----></li><!--]--><!--]--><!--[--><!--$s15--><!--[-1--><li id="bits-s15" data-navigation-menu-item=""><!--[--><!--$s16--><!--[-1--><button class="inline-flex items-center gap-2 rounded-lg border border-transparent px-3 py-1.5 text-sm font-medium text-foreground-muted transition-colors hover:bg-surface hover:text-foreground data-[state=open]:bg-surface-hover data-[state=open]:text-foreground" id="bits-s16" data-state="closed" data-value="bits-s15" aria-expanded="false" data-navigation-menu-trigger="" tabindex="0"><!---->Company <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide lucide-chevron-down transition-transform data-[state=open]:rotate-180"><!--[--><!----><path d="m6 9 6 6 6-6"><!----></path><!----><!--]--><!----><!----></svg><!----><!----></button><!--]--> <!--[-1--><!--]--><!--]--> <!--[--><!--$s17--><!--[0--><!--[-1--><!--]--><!----><!--]--><!--]--><!----></li><!--]--><!--]--><!--]--> <!--[--><!--$s18--><!--[-1--><li id="bits-s18" data-navigation-menu-item=""><!--[--><!--$s19--><!--[-1--><a href="https://antmicro.com/blog/" class="inline-flex rounded-lg px-4 py-2 text-sm font-medium text-foreground-muted transition-colors hover:bg-surface-hover hover:text-foreground" id="bits-s19" data-navigation-menu-link="" tabindex="0"><!---->Blog<!----></a><!--]--><!--]--><!----></li><!--]--><!--]--><!----></ul></div> <!----><!--]--><!--]--> <div class="pointer-events-none fixed top-18 left-1/2 z-300 w-screen -translate-x-1/2 px-0"><!--[--><!--$s20--><!--[-1--><!--]--><!--]--></div><!----></nav><!--]--><!--]--> <div class="ml-auto flex items-center gap-2"><!--[-1--><button data-slot="button" class="inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-lg font-medium text-xs whitespace-nowrap transition-all duration-200 outline-none disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 bg-transparent hover:bg-surface-hover size-9 text-foreground-muted hover:text-foreground" type="button" aria-label="Toggle color theme"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide lucide-sun h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all! dark:scale-0 dark:-rotate-90"><!--[--><!----><circle cx="12" cy="12" r="4"><!----></circle><!----><!----><path d="M12 2v2"><!----></path><!----><!----><path d="M12 20v2"><!----></path><!----><!----><path d="m4.93 4.93 1.41 1.41"><!----></path><!----><!----><path d="m17.66 17.66 1.41 1.41"><!----></path><!----><!----><path d="M2 12h2"><!----></path><!----><!----><path d="M20 12h2"><!----></path><!----><!----><path d="m6.34 17.66-1.41 1.41"><!----></path><!----><!----><path d="m19.07 4.93-1.41 1.41"><!----></path><!----><!--]--><!----><!----></svg><!----> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide lucide-moon absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all! dark:scale-100 dark:rotate-0"><!--[--><!----><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"><!----></path><!----><!--]--><!----><!----></svg><!----><!----></button><!--]--><!----> <button type="button" class="relative inline-flex size-9 items-center justify-center rounded-lg bg-background text-foreground-muted transition-colors hover:bg-surface-hover hover:text-foreground lg:hidden" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-main-menu"><span class="absolute h-0.5 w-4 rounded-full bg-current transition-transform duration-200 -translate-y-1.5"></span> <span class="absolute h-0.5 w-4 rounded-full bg-current transition-all duration-200 opacity-100"></span> <span class="absolute h-0.5 w-4 rounded-full bg-current transition-transform duration-200 translate-y-1.5"></span></button></div> <div class="absolute bottom-0 left-0 z-400 hidden size-2.5 -translate-x-1/2 translate-y-1/2 rounded-full border-2 border-border-hover bg-background sm:block"></div> <div class="absolute right-0 bottom-0 z-400 hidden size-2.5 translate-x-1/2 translate-y-1/2 rounded-full border-2 border-border-hover bg-background sm:block"></div> <div class="absolute bottom-0 left-1/2 w-screen -translate-x-1/2 border-b border-border/60"></div></nav></div></header> <!--[-1--><!--]--><!----> <main id="page-content" class="pt-18"><!-- Treść <main> podstrony Partnerzy.         <article class="partner-tile partner-tile--big partner-tile--knockout" data-index="0" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-nvidia.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-nvidia.svg" alt="NVIDIA logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-nvidia.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-nvidia.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>NVIDIA</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="0" aria-haspopup="dialog" aria-label="Show more about NVIDIA"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--wide partner-tile--knockout" data-index="1" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-analog-devices.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-analog-devices.svg" alt="Analog Devices logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-analog-devices.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-analog-devices.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Analog Devices</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="1" aria-haspopup="dialog" aria-label="Show more about Analog Devices"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="2" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-ambiq.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-ambiq.svg" alt="Ambiq logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-ambiq.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-ambiq.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Ambiq</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="2" aria-haspopup="dialog" aria-label="Show more about Ambiq"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="3" data-group="space">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-aethero.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-aethero.svg" alt="Aethero logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-aethero.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-aethero.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Aethero</span><span>Space</span></div>
+          <button type="button" class="partner-tile__open" data-open="3" aria-haspopup="dialog" aria-label="Show more about Aethero"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="4" data-group="vision">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-allied.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-allied.svg" alt="Allied Vision logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-allied.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-allied.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Allied Vision</span><span>Vision</span></div>
+          <button type="button" class="partner-tile__open" data-open="4" aria-haspopup="dialog" aria-label="Show more about Allied Vision"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="5" data-group="vision">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-apertus.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-apertus.svg" alt="apertus° logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-apertus.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-apertus.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>apertus°</span><span>Vision</span></div>
+          <button type="button" class="partner-tile__open" data-open="5" aria-haspopup="dialog" aria-label="Show more about apertus°"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--big partner-tile--knockout" data-index="6" data-group="open-source">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-risc.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-risc.svg" alt="RISC-V International logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-risc.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-risc.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>RISC-V International</span><span>Open source</span></div>
+          <button type="button" class="partner-tile__open" data-open="6" aria-haspopup="dialog" aria-label="Show more about RISC-V International"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--wide partner-tile--knockout" data-index="7" data-group="open-source">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-chips.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-chips.svg" alt="CHIPS Alliance logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-chips.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-chips.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>CHIPS Alliance</span><span>Open source</span></div>
+          <button type="button" class="partner-tile__open" data-open="7" aria-haspopup="dialog" aria-label="Show more about CHIPS Alliance"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="8" data-group="hardware">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-circuithub.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-circuithub.svg" alt="CircuitHub logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-circuithub.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-circuithub.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>CircuitHub</span><span>Manufacturing</span></div>
+          <button type="button" class="partner-tile__open" data-open="8" aria-haspopup="dialog" aria-label="Show more about CircuitHub"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="9" data-group="hardware">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-enclustra.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-enclustra.svg" alt="Enclustra logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-enclustra.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-enclustra.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Enclustra</span><span>Modules</span></div>
+          <button type="button" class="partner-tile__open" data-open="9" aria-haspopup="dialog" aria-label="Show more about Enclustra"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="10" data-group="vision">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-framos.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-framos.svg" alt="FRAMOS logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-framos.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-framos.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>FRAMOS</span><span>Vision</span></div>
+          <button type="button" class="partner-tile__open" data-open="10" aria-haspopup="dialog" aria-label="Show more about FRAMOS"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--big partner-tile--knockout" data-index="11" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-microchip.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-microchip.svg" alt="Microchip logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-microchip.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-microchip.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Microchip</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="11" aria-haspopup="dialog" aria-label="Show more about Microchip"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--wide partner-tile--knockout" data-index="12" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-lattice.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-lattice.svg" alt="Lattice Semiconductor logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-lattice.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-lattice.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Lattice Semiconductor</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="12" aria-haspopup="dialog" aria-label="Show more about Lattice Semiconductor"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="13" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-nxp.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-nxp.svg" alt="NXP logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-nxp.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-nxp.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>NXP</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="13" aria-haspopup="dialog" aria-label="Show more about NXP"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="14" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-quicklogic.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-quicklogic.svg" alt="QuickLogic logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-quicklogic.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-quicklogic.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>QuickLogic</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="14" aria-haspopup="dialog" aria-label="Show more about QuickLogic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="15" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-renesas.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-renesas.svg" alt="Renesas logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-renesas.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-renesas.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Renesas</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="15" aria-haspopup="dialog" aria-label="Show more about Renesas"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="16" data-group="space">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-sics.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-sics.svg" alt="RISE logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-sics.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-sics.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>RISE</span><span>Research</span></div>
+          <button type="button" class="partner-tile__open" data-open="16" aria-haspopup="dialog" aria-label="Show more about RISE"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--big partner-tile--knockout" data-index="17" data-group="open-source">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-zephyr.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-zephyr.svg" alt="Zephyr Project logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-zephyr.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-zephyr.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Zephyr Project</span><span>Open source</span></div>
+          <button type="button" class="partner-tile__open" data-open="17" aria-haspopup="dialog" aria-label="Show more about Zephyr Project"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--wide partner-tile--knockout" data-index="18" data-group="open-source">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-linux.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-linux.svg" alt="The Linux Foundation logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-linux.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-linux.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>The Linux Foundation</span><span>Open source</span></div>
+          <button type="button" class="partner-tile__open" data-open="18" aria-haspopup="dialog" aria-label="Show more about The Linux Foundation"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="19" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-sifive.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-sifive.svg" alt="SiFive logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-sifive.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-sifive.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>SiFive</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="19" aria-haspopup="dialog" aria-label="Show more about SiFive"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="20" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-silabs.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-silabs.svg" alt="Silicon Labs logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-silabs.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-silabs.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Silicon Labs</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="20" aria-haspopup="dialog" aria-label="Show more about Silicon Labs"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="21" data-group="hardware">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-solidrun.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-solidrun.svg" alt="SolidRun logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-solidrun.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-solidrun.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>SolidRun</span><span>Modules</span></div>
+          <button type="button" class="partner-tile__open" data-open="21" aria-haspopup="dialog" aria-label="Show more about SolidRun"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="22" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-st.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-st.svg" alt="STMicroelectronics logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-st.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-st.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>STMicroelectronics</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="22" aria-haspopup="dialog" aria-label="Show more about STMicroelectronics"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="23" data-group="space">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-thales.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-thales.svg" alt="Thales logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-thales.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-thales.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Thales</span><span>Aerospace</span></div>
+          <button type="button" class="partner-tile__open" data-open="23" aria-haspopup="dialog" aria-label="Show more about Thales"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="24" data-group="hardware">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-toradex.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-toradex.svg" alt="Toradex logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-toradex.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-toradex.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Toradex</span><span>Modules</span></div>
+          <button type="button" class="partner-tile__open" data-open="24" aria-haspopup="dialog" aria-label="Show more about Toradex"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <a class="partner-tile partner-tile--cta" href="../about/contact/?topic=partnership">
+          <span class="cta-label">Join us</span>
+          <span class="cta-title">Become a partner</span>
+          <span class="cta-desc">We work with silicon vendors, hardware makers and open source foundations. Let's talk about how we can build together.</span>
+          <span class="cta-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a> wypełnia build.py na podstawie partners.json. -->
+
+<section class="relative z-10 overflow-x-clip overflow-y-visible bg-background-secondary">
+  <div class="absolute inset-0 bg-linear-to-b from-background/60 via-background/30 to-background/85 dark:from-background/45 dark:via-background/28 dark:to-background/90"></div>
+  <div class="absolute inset-x-0 bottom-0 h-36 bg-linear-to-t from-background via-background/72 to-transparent"></div>
+  <div class="partners-hero relative isolate mx-auto grid max-w-7xl grid-cols-1 gap-10 px-3 sm:px-6 lg:px-8">
+    <div class="pointer-events-none absolute top-0 left-0 z-50 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-border-hover bg-background"></div>
+    <div class="pointer-events-none absolute top-0 right-0 z-50 size-2.5 translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-border-hover bg-background"></div>
+    <!-- Wariant B hero: zamknięte okno (jak na stronie Renode) z animacją chipu w ditherze -->
+    <div class="hero-window-bar" aria-hidden="true">
+      <div class="hero-window-bar__tags">
+        <span>Partners</span><span>Ecosystem</span>
+      </div>
+      <div class="hero-window-bar__dots"><i></i><i></i><i></i></div>
+    </div>
+    <div class="hero-dither" data-hero-dither aria-hidden="true">
+      <canvas></canvas>
+      <video src="media/chip-loop.mp4" muted loop playsinline autoplay preload="auto"></video>
+    </div>
+    <div class="partners-hero__text relative z-10 flex flex-col gap-6">
+      <div class="partners-hero__tags flex flex-wrap gap-2">
+        <span class="flex w-max flex-row items-center justify-center gap-1 rounded-full border py-1 font-mono text-xs tracking-wide uppercase border-border/80 bg-background px-2.5 font-medium text-foreground">Partners</span>
+        <span class="flex w-max flex-row items-center justify-center gap-1 rounded-full border py-1 font-mono text-xs tracking-wide uppercase border-border/80 bg-background px-2.5 font-medium text-foreground">Ecosystem</span>
+      </div>
+      <div class="flex flex-col">
+        <h1 class="max-w-4xl text-4xl leading-tight font-medium tracking-tight text-balance text-foreground">Building open, software-driven systems together with industry leaders</h1>
+        <p class="partners-hero__lead mt-4 text-sm leading-6 text-balance text-foreground-muted">We collaborate with silicon vendors, hardware manufacturers, open source foundations and research institutions to help our customers build better products faster, from silicon and modules to operating systems and tooling.</p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a data-slot="button" class="inline-flex w-max shrink-0 cursor-pointer items-center justify-center gap-2 font-medium text-xs whitespace-nowrap transition-all duration-200 outline-none bg-foreground hover:bg-foreground-muted text-background hover:text-background-secondary h-10 px-6 rounded-full" href="../about/contact/?topic=partnership">Become a partner</a>
+        <a data-slot="button" class="inline-flex w-max shrink-0 cursor-pointer items-center justify-center gap-2 font-medium text-xs whitespace-nowrap transition-all duration-200 outline-none border border-border/80 bg-background hover:bg-background-secondary text-foreground h-10 px-6 rounded-full" href="#partners-grid">See our partners</a>
+      </div>
+    </div>
+    <!-- Wariant C hero: płytka PCB z partnerami jako układami (pcb.js) -->
+    <div class="hero-pcb" data-hero-pcb>
+      <svg class="hero-pcb__svg" viewBox="0 0 760 520" preserveAspectRatio="xMidYMid meet" aria-label="Partner ecosystem board"></svg>
+    </div>
+    <!-- Orbity partnerów: rysuje orbit.js na podstawie danych partnerów -->
+    <div class="orbit" data-orbit>
+      <svg class="orbit__svg" viewBox="0 110 640 420" aria-hidden="true"></svg>
+      <div class="orbit__labels"></div>
+    </div>
+  </div>
+</section>
+
+<section id="partners-grid" class="relative z-10 w-full overflow-x-clip overflow-y-visible border-t border-border/60 px-3" aria-labelledby="partners-heading">
+  <div class="relative isolate mx-auto max-w-7xl border-x border-border/60 px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+    <div class="pointer-events-none absolute top-0 left-0 z-50 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-border-hover bg-background"></div>
+    <div class="pointer-events-none absolute top-0 right-0 z-50 size-2.5 translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-border-hover bg-background"></div>
+    <span class="flex w-max flex-row items-center justify-center gap-1 rounded-full border px-2 py-1 font-mono text-xs tracking-wide uppercase font-medium text-foreground">Our partners</span>
+    <h2 id="partners-heading" class="mt-4 max-w-3xl text-3xl font-medium tracking-tight text-balance text-foreground">Trusted across the whole stack</h2>
+    <p class="mt-4 max-w-2xl text-sm leading-6 text-foreground-muted">25 organizations we work with on silicon enablement, open hardware, operating systems and developer tooling.</p>
+
+    <div class="partners-tabs mt-10" role="group" aria-label="Filter partners by industry">
+        <button type="button" class="partners-tabs__btn" data-filter="all" aria-pressed="true">All<span class="partners-tabs__n">25</span></button>
+        <button type="button" class="partners-tabs__btn" data-filter="silicon" aria-pressed="false">Silicon<span class="partners-tabs__n">11</span></button>
+        <button type="button" class="partners-tabs__btn" data-filter="open-source" aria-pressed="false">Open source<span class="partners-tabs__n">4</span></button>
+        <button type="button" class="partners-tabs__btn" data-filter="hardware" aria-pressed="false">Hardware &amp; modules<span class="partners-tabs__n">4</span></button>
+        <button type="button" class="partners-tabs__btn" data-filter="vision" aria-pressed="false">Vision<span class="partners-tabs__n">3</span></button>
+        <button type="button" class="partners-tabs__btn" data-filter="space" aria-pressed="false">Space &amp; research<span class="partners-tabs__n">3</span></button>
+    </div>
+
+    <div data-layout="bento" class="partners-bento -mx-4 mt-6 border-y border-border/60 sm:-mx-6 lg:-mx-8">
+      <div class="partners-bento__grid">
+        <article class="partner-tile partner-tile--big partner-tile--knockout" data-index="0" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-nvidia.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-nvidia.svg" alt="NVIDIA logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-nvidia.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-nvidia.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>NVIDIA</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="0" aria-haspopup="dialog" aria-label="Show more about NVIDIA"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--wide partner-tile--knockout" data-index="1" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-analog-devices.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-analog-devices.svg" alt="Analog Devices logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-analog-devices.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-analog-devices.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Analog Devices</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="1" aria-haspopup="dialog" aria-label="Show more about Analog Devices"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="2" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-ambiq.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-ambiq.svg" alt="Ambiq logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-ambiq.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-ambiq.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Ambiq</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="2" aria-haspopup="dialog" aria-label="Show more about Ambiq"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="3" data-group="space">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-aethero.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-aethero.svg" alt="Aethero logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-aethero.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-aethero.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Aethero</span><span>Space</span></div>
+          <button type="button" class="partner-tile__open" data-open="3" aria-haspopup="dialog" aria-label="Show more about Aethero"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="4" data-group="vision">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-allied.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-allied.svg" alt="Allied Vision logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-allied.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-allied.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Allied Vision</span><span>Vision</span></div>
+          <button type="button" class="partner-tile__open" data-open="4" aria-haspopup="dialog" aria-label="Show more about Allied Vision"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="5" data-group="vision">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-apertus.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-apertus.svg" alt="apertus° logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-apertus.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-apertus.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>apertus°</span><span>Vision</span></div>
+          <button type="button" class="partner-tile__open" data-open="5" aria-haspopup="dialog" aria-label="Show more about apertus°"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--big partner-tile--knockout" data-index="6" data-group="open-source">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-risc.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-risc.svg" alt="RISC-V International logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-risc.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-risc.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>RISC-V International</span><span>Open source</span></div>
+          <button type="button" class="partner-tile__open" data-open="6" aria-haspopup="dialog" aria-label="Show more about RISC-V International"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--wide partner-tile--knockout" data-index="7" data-group="open-source">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-chips.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-chips.svg" alt="CHIPS Alliance logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-chips.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-chips.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>CHIPS Alliance</span><span>Open source</span></div>
+          <button type="button" class="partner-tile__open" data-open="7" aria-haspopup="dialog" aria-label="Show more about CHIPS Alliance"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="8" data-group="hardware">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-circuithub.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-circuithub.svg" alt="CircuitHub logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-circuithub.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-circuithub.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>CircuitHub</span><span>Manufacturing</span></div>
+          <button type="button" class="partner-tile__open" data-open="8" aria-haspopup="dialog" aria-label="Show more about CircuitHub"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="9" data-group="hardware">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-enclustra.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-enclustra.svg" alt="Enclustra logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-enclustra.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-enclustra.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Enclustra</span><span>Modules</span></div>
+          <button type="button" class="partner-tile__open" data-open="9" aria-haspopup="dialog" aria-label="Show more about Enclustra"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="10" data-group="vision">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-framos.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-framos.svg" alt="FRAMOS logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-framos.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-framos.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>FRAMOS</span><span>Vision</span></div>
+          <button type="button" class="partner-tile__open" data-open="10" aria-haspopup="dialog" aria-label="Show more about FRAMOS"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--big partner-tile--knockout" data-index="11" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-microchip.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-microchip.svg" alt="Microchip logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-microchip.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-microchip.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Microchip</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="11" aria-haspopup="dialog" aria-label="Show more about Microchip"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--wide partner-tile--knockout" data-index="12" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-lattice.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-lattice.svg" alt="Lattice Semiconductor logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-lattice.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-lattice.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Lattice Semiconductor</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="12" aria-haspopup="dialog" aria-label="Show more about Lattice Semiconductor"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="13" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-nxp.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-nxp.svg" alt="NXP logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-nxp.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-nxp.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>NXP</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="13" aria-haspopup="dialog" aria-label="Show more about NXP"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="14" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-quicklogic.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-quicklogic.svg" alt="QuickLogic logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-quicklogic.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-quicklogic.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>QuickLogic</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="14" aria-haspopup="dialog" aria-label="Show more about QuickLogic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="15" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-renesas.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-renesas.svg" alt="Renesas logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-renesas.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-renesas.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Renesas</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="15" aria-haspopup="dialog" aria-label="Show more about Renesas"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="16" data-group="space">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-sics.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-sics.svg" alt="RISE logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-sics.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-sics.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>RISE</span><span>Research</span></div>
+          <button type="button" class="partner-tile__open" data-open="16" aria-haspopup="dialog" aria-label="Show more about RISE"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--big partner-tile--knockout" data-index="17" data-group="open-source">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-zephyr.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-zephyr.svg" alt="Zephyr Project logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-zephyr.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-zephyr.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Zephyr Project</span><span>Open source</span></div>
+          <button type="button" class="partner-tile__open" data-open="17" aria-haspopup="dialog" aria-label="Show more about Zephyr Project"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--wide partner-tile--knockout" data-index="18" data-group="open-source">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-linux.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-linux.svg" alt="The Linux Foundation logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-linux.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-linux.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>The Linux Foundation</span><span>Open source</span></div>
+          <button type="button" class="partner-tile__open" data-open="18" aria-haspopup="dialog" aria-label="Show more about The Linux Foundation"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="19" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-sifive.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-sifive.svg" alt="SiFive logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-sifive.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-sifive.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>SiFive</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="19" aria-haspopup="dialog" aria-label="Show more about SiFive"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="20" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-silabs.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-silabs.svg" alt="Silicon Labs logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-silabs.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-silabs.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Silicon Labs</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="20" aria-haspopup="dialog" aria-label="Show more about Silicon Labs"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="21" data-group="hardware">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-solidrun.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-solidrun.svg" alt="SolidRun logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-solidrun.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-solidrun.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>SolidRun</span><span>Modules</span></div>
+          <button type="button" class="partner-tile__open" data-open="21" aria-haspopup="dialog" aria-label="Show more about SolidRun"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="22" data-group="silicon">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-st.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-st.svg" alt="STMicroelectronics logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-st.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-st.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>STMicroelectronics</span><span>Silicon</span></div>
+          <button type="button" class="partner-tile__open" data-open="22" aria-haspopup="dialog" aria-label="Show more about STMicroelectronics"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="23" data-group="space">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-thales.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-thales.svg" alt="Thales logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-thales.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-thales.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Thales</span><span>Aerospace</span></div>
+          <button type="button" class="partner-tile__open" data-open="23" aria-haspopup="dialog" aria-label="Show more about Thales"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <article class="partner-tile partner-tile--knockout" data-index="24" data-group="hardware">
+          <div class="partner-tile__logo">
+            <span class="partner-tile__mono" style="--logo:url('logos/mono/partner-toradex.svg')" aria-hidden="true"></span>
+            <img class="partner-tile__color" src="logos/partner-toradex.svg" alt="Toradex logo">
+            <img class="partner-tile__flat partner-tile__flat--dark" src="logos/flat-dark/partner-toradex.svg" alt="" aria-hidden="true">
+            <img class="partner-tile__flat partner-tile__flat--light" src="logos/flat-light/partner-toradex.svg" alt="" aria-hidden="true">
+          </div>
+          <div class="partner-tile__meta"><span>Toradex</span><span>Modules</span></div>
+          <button type="button" class="partner-tile__open" data-open="24" aria-haspopup="dialog" aria-label="Show more about Toradex"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+        </article>
+        <a class="partner-tile partner-tile--cta" href="../about/contact/?topic=partnership">
+          <span class="cta-label">Join us</span>
+          <span class="cta-title">Become a partner</span>
+          <span class="cta-desc">We work with silicon vendors, hardware makers and open source foundations. Let's talk about how we can build together.</span>
+          <span class="cta-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="relative z-10 w-full overflow-x-clip overflow-y-visible border-t border-border/60 px-3" aria-labelledby="partners-contact-heading">
+  <div class="relative isolate mx-auto max-w-7xl border-x border-border/60 px-4 py-16 sm:px-6 lg:px-8">
+    <div class="pointer-events-none absolute top-0 left-0 z-50 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-border-hover bg-background"></div>
+    <div class="pointer-events-none absolute top-0 right-0 z-50 size-2.5 translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-border-hover bg-background"></div>
+    <div class="flex flex-col gap-6 items-center justify-center text-center">
+      <h2 id="partners-contact-heading" class="font-medium tracking-tight text-balance text-foreground max-w-4xl text-3xl">Want to build the open ecosystem with us? Let's talk about how we can work together.</h2>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <a data-slot="button" class="inline-flex w-max shrink-0 cursor-pointer items-center justify-center gap-2 font-medium text-xs whitespace-nowrap transition-all duration-200 outline-none bg-foreground hover:bg-foreground-muted text-background hover:text-background-secondary h-10 px-6 rounded-full" href="../about/contact/?topic=partnership">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main><!--]--><!----></main> <footer class="relative z-40 border-t border-border/60 bg-background"><div class="mx-auto w-full max-w-7xl border-x border-border/60 px-4 py-12 sm:px-6 lg:px-8"><div class="flex flex-col-reverse gap-10 md:flex-row md:gap-16"><div class="flex flex-col gap-4"><a href="https://antmicro.com/" class="inline-flex items-center text-foreground transition-opacity hover:opacity-80" aria-label="Antmicro homepage"><svg viewBox="0 0 1154 550" fill="none" xmlns="http://www.w3.org/2000/svg" class="block h-14 w-auto dark:hidden" width="100%" height="100%" role="presentation" aria-hidden="true"><path d="M455.749 323.688C433.629 323.688 420.598 314.079 420.598 295.737C420.598 273.452 442.554 264.883 472.367 261.981V256.314C472.367 243.639 465.523 237.972 452.656 237.972C444.607 237.972 435.846 240.381 429.522 243.803L425.909 234.55C433.629 230.58 444.087 227.87 454.024 227.87C474.091 227.87 486.438 237.288 486.438 257.875V317.172C479.074 321.115 468.096 323.688 455.749 323.688ZM472.367 269.838C448.878 272.576 434.998 279.092 434.998 295.381C434.998 307.892 442.718 314.928 457.118 314.928C462.949 314.928 468.78 313.723 472.367 311.834V269.838Z" fill="#332D37"></path><path d="M558.82 321.963V258.203C558.82 244.323 553.153 237.452 538.069 237.452C531.718 237.452 526.571 238.492 521.78 240.546V321.963H506.695V234.358C515.264 230.416 526.571 227.843 538.069 227.843C562.927 227.843 573.905 238.629 573.905 258.176V321.963H558.82Z" fill="#332D37"></path><path d="M616.778 322.84C603.582 322.84 594.657 314.791 594.657 299.515V239.013H584.035V229.568H594.657V208.324L609.742 203.67V229.568H625.867V239.013H609.742V299.515C609.742 307.564 613.684 312.382 621.24 312.382C622.965 312.382 624.498 312.218 625.867 311.698V321.307C623.457 322.32 620.364 322.84 616.778 322.84Z" fill="#332D37"></path><path d="M743.613 321.963V257.519C743.613 245.336 738.137 237.452 724.586 237.452C717.03 237.452 711.035 240.874 706.6 246.212V321.963H691.679V255.11C691.679 244.488 685.848 237.425 672.16 237.425C665.124 237.425 659.977 238.301 654.83 240.518V321.963H639.91V234.358C648.835 230.416 659.101 227.843 671.612 227.843C685.492 227.843 693.377 231.621 699.372 238.629C705.532 231.949 714.977 227.843 725.955 227.843C748.595 227.843 758.533 240.025 758.533 257.656V321.963H743.613Z" fill="#332D37"></path><path d="M778.957 321.964V289.14V260.613V229.568H787.115H794.042V253.085V275.451V321.964H786.65H778.957Z" fill="#332D37"></path><path d="M843.922 323.688C821.637 323.688 808.086 303.95 808.086 275.67C808.086 247.39 821.802 227.843 843.922 227.843C852.491 227.843 859.691 230.06 864.673 233.838L861.087 242.763C857.473 240.025 851.998 238.109 846.495 238.109C831.767 238.109 823.526 254.07 823.526 275.314C823.526 296.229 831.931 312.683 846.495 312.683C851.998 312.683 857.309 310.958 860.895 308.248L864.673 317.665C859.663 321.471 852.491 323.688 843.922 323.688Z" fill="#332D37"></path><path d="M915.376 239.697C912.638 238.657 909.38 238.136 905.958 238.136C901.851 238.136 897.553 238.821 894.295 240.546V321.963H879.211V234.358C887.095 230.416 897.553 227.843 910.749 227.843C914.198 227.843 917.949 228.171 918.798 228.336L915.376 239.697Z" fill="#332D37"></path><path d="M957.481 323.688C932.459 323.688 920.961 303.457 920.961 275.67C920.961 248.074 932.432 227.843 957.481 227.843C982.504 227.843 994.002 248.074 994.002 275.67C993.974 303.457 982.504 323.688 957.481 323.688ZM957.481 237.452C941.384 237.452 936.045 254.781 936.045 275.341C936.045 295.901 941.384 313.559 957.481 313.559C973.606 313.559 978.917 295.901 978.917 275.341C978.917 254.781 973.579 237.452 957.481 237.452Z" fill="#332D37"></path><path d="M277.748 277.094H303.29C304.139 280.242 307.041 282.514 310.491 282.514C314.624 282.514 317.964 279.284 317.964 275.15C317.964 271.016 314.624 267.539 310.491 267.539C307.014 267.539 304.112 270.003 303.29 273.234H277.748V262.283H289.63C289.63 262.283 290.615 262.393 291.217 261.927C292.285 261.106 295.023 258.45 295.023 258.45L302.524 250.949C303.564 251.497 304.714 251.825 305.973 251.825C310.107 251.825 313.475 248.458 313.475 244.324C313.475 240.19 310.135 236.823 305.973 236.823C301.84 236.823 298.5 240.163 298.5 244.324C298.5 245.802 298.938 247.171 299.677 248.348L290.944 257.109C290.944 257.109 289.849 258.149 289.438 258.313C289.192 258.423 288.535 258.423 288.535 258.423H277.83V253.742V241.751C282.731 240.847 286.427 236.549 286.427 231.402C286.427 225.571 281.69 220.862 275.887 220.862C270.055 220.862 265.347 225.571 265.347 231.402C265.347 236.549 269.07 240.847 273.97 241.751V258.45C273.97 258.45 262.609 258.45 262.335 258.341C261.897 258.177 260.829 257.136 260.829 257.136L252.069 248.376C252.808 247.226 253.246 245.857 253.246 244.351C253.246 240.218 249.906 236.85 245.745 236.85C241.611 236.85 238.244 240.19 238.244 244.351C238.244 248.485 241.584 251.853 245.745 251.853C247.004 251.853 248.154 251.524 249.194 250.977L256.696 258.478C256.696 258.478 259.406 261.133 260.474 261.955C261.076 262.42 262.061 262.31 262.061 262.31H273.943V273.261H248.4C247.552 270.031 244.677 267.567 241.2 267.567C237.067 267.567 233.699 271.044 233.699 275.177C233.699 279.311 237.039 282.542 241.2 282.542C244.65 282.542 247.552 280.269 248.4 277.121H273.943V287.798H262.061C262.061 287.798 261.076 287.689 260.474 288.154C259.406 289.003 256.696 291.631 256.696 291.631L249.194 299.132C248.154 298.584 247.004 298.256 245.745 298.256C241.611 298.256 238.244 301.623 238.244 305.757C238.244 309.891 241.584 313.258 245.745 313.258C249.879 313.258 253.246 309.918 253.246 305.757C253.246 304.279 252.808 302.91 252.069 301.733L260.829 292.972C260.829 292.972 261.897 291.932 262.335 291.74C262.582 291.631 263.239 291.631 263.239 291.631H273.97V308.33C269.07 309.234 265.347 313.532 265.347 318.679C265.347 324.483 270.083 329.219 275.887 329.219C281.69 329.219 286.427 324.483 286.427 318.679C286.427 313.532 282.703 309.234 277.83 308.33V291.631H288.535C288.535 291.631 289.192 291.631 289.438 291.74C289.876 291.905 290.944 292.972 290.944 292.972L299.677 301.733C298.938 302.883 298.5 304.279 298.5 305.757C298.5 309.891 301.84 313.258 305.973 313.258C310.107 313.258 313.475 309.918 313.475 305.757C313.475 301.623 310.135 298.256 305.973 298.256C304.714 298.256 303.564 298.584 302.524 299.132L295.023 291.631C295.023 291.631 292.285 288.975 291.217 288.154C290.615 287.689 289.63 287.798 289.63 287.798H277.748V281.419V277.094ZM310.491 271.372C312.516 271.372 314.159 273.015 314.159 275.041C314.159 277.066 312.516 278.709 310.491 278.709C308.465 278.709 306.822 277.066 306.822 275.041C306.822 273.015 308.492 271.372 310.491 271.372ZM305.946 240.683C307.972 240.683 309.614 242.326 309.614 244.351C309.614 246.377 307.972 248.02 305.946 248.02C303.92 248.02 302.278 246.377 302.278 244.351C302.278 242.326 303.92 240.683 305.946 240.683ZM245.69 247.992C243.664 247.992 242.022 246.35 242.022 244.324C242.022 242.298 243.664 240.656 245.69 240.656C247.716 240.656 249.359 242.298 249.359 244.324C249.359 246.35 247.716 247.992 245.69 247.992ZM241.118 278.682C239.092 278.682 237.45 277.039 237.45 275.013C237.45 272.987 239.092 271.345 241.118 271.345C243.144 271.345 244.787 272.987 244.787 275.013C244.787 277.039 243.144 278.682 241.118 278.682ZM245.69 309.371C243.664 309.371 242.022 307.728 242.022 305.702C242.022 303.676 243.664 302.034 245.69 302.034C247.716 302.034 249.359 303.676 249.359 305.702C249.359 307.728 247.716 309.371 245.69 309.371ZM305.946 302.034C307.972 302.034 309.614 303.676 309.614 305.702C309.614 307.728 307.972 309.371 305.946 309.371C303.92 309.371 302.278 307.728 302.278 305.702C302.278 303.676 303.92 302.034 305.946 302.034ZM275.832 325.304C272.163 325.304 269.179 322.32 269.179 318.651C269.179 314.983 272.163 311.999 275.832 311.999C279.5 311.999 282.484 314.983 282.484 318.651C282.484 322.32 279.5 325.304 275.832 325.304ZM275.832 224.722C279.5 224.722 282.484 227.706 282.484 231.375C282.484 235.043 279.5 238.027 275.832 238.027C272.163 238.027 269.179 235.043 269.179 231.375C269.152 227.706 272.163 224.722 275.832 224.722Z" fill="#332D37"></path><path d="M278.842 361.414C262.005 370.75 245.579 377.84 225.841 377.84C223.952 377.84 222.09 377.785 220.228 377.676L166.926 346.959C162.628 344.495 160 339.924 160 334.968V285.608C172.894 304.58 198.793 319.008 204.241 321.91L271.998 360.976C274.106 362.181 276.624 362.318 278.842 361.414Z" fill="url(#paint0_linear_3_624)"></path><path d="M351.661 316.051C350.922 351.339 331.841 376.252 330.609 378.168L282.727 405.764C278.457 408.255 273.173 408.255 268.902 405.764L220.227 377.675C222.088 377.785 223.95 377.84 225.839 377.84C245.577 377.84 262.003 370.749 278.84 361.414C279.168 361.304 279.469 361.14 279.771 360.976L347.829 321.718C348.157 321.526 350.074 320.458 351.114 317.995C351.388 317.392 351.579 316.735 351.661 316.051Z" fill="url(#paint1_linear_3_624)"></path><path d="M391.634 334.995C391.634 339.923 389.006 344.523 384.708 346.986L330.612 378.168C331.843 376.252 350.925 351.339 351.664 316.051C351.691 315.722 351.719 315.366 351.719 315.011L351.637 235.892V235.126C351.691 232.306 350.213 229.705 347.777 228.282L279.773 188.969C278.569 188.284 277.227 187.929 275.886 187.929C275.475 187.929 275.064 187.956 274.681 188.038C274.298 188.093 273.942 188.175 273.586 188.312C273.531 188.312 273.504 188.312 273.449 188.339C281.471 184.315 306.767 172.762 326.313 172.954C328.504 172.981 330.694 173.063 332.856 173.2L384.598 203.123C388.951 205.641 391.579 210.295 391.497 215.305L391.634 334.995Z" fill="#322E35"></path><path d="M332.855 173.2C330.692 173.063 328.502 172.981 326.312 172.954C306.765 172.762 281.469 184.315 273.448 188.339C273.284 188.394 273.092 188.449 272.928 188.531C272.599 188.64 272.298 188.805 271.997 188.969L203.911 228.391C203.638 228.555 203.364 228.72 203.118 228.939C202.597 229.322 202.132 229.76 201.749 230.28C201.721 230.308 201.694 230.362 201.639 230.417C201.146 231.074 200.763 231.786 200.517 232.552C200.489 232.662 200.517 232.552 200.435 232.799C199.86 228.528 199.586 224.175 199.586 219.768C199.586 205.504 202.46 191.98 207.607 179.716L268.876 144.236C273.174 141.744 278.458 141.744 282.756 144.236L332.855 173.2Z" fill="url(#paint2_linear_3_624)"></path><path d="M203.939 321.718L204.241 321.91C198.793 319.008 172.894 304.58 160 285.608V215.278C160 210.323 162.628 205.778 166.899 203.287L207.608 179.716C202.461 191.981 199.587 205.505 199.587 219.768C199.587 224.175 199.86 228.528 200.435 232.799C200.189 233.538 200.052 234.305 200.052 235.126V314.983C200.052 317.776 201.53 320.322 203.939 321.718Z" fill="url(#paint3_linear_3_624)"></path><defs><linearGradient id="paint0_linear_3_624" x1="265.297" y1="397.026" x2="151.559" y2="283.08" gradientUnits="userSpaceOnUse"><stop stop-color="#292B2F"></stop><stop offset="0.0235" stop-color="#3A3E43"></stop><stop offset="0.0755" stop-color="#596369"></stop><stop offset="0.1331" stop-color="#75828A"></stop><stop offset="0.1951" stop-color="#8A9CA6"></stop><stop offset="0.2629" stop-color="#9CB3BC"></stop><stop offset="0.3384" stop-color="#AAC4CE"></stop><stop offset="0.425" stop-color="#B4D2DD"></stop><stop offset="0.5293" stop-color="#BCDDE8"></stop><stop offset="0.6697" stop-color="#C0E3ED"></stop><stop offset="1" stop-color="#C1E4EF"></stop></linearGradient><linearGradient id="paint1_linear_3_624" x1="220.227" y1="361.849" x2="351.661" y2="361.849" gradientUnits="userSpaceOnUse"><stop stop-color="#93292C"></stop><stop offset="0.0372" stop-color="#9F2D2F"></stop><stop offset="0.1348" stop-color="#B93733"></stop><stop offset="0.2479" stop-color="#CE3C36"></stop><stop offset="0.3843" stop-color="#DF4139"></stop><stop offset="0.5679" stop-color="#E7463C"></stop><stop offset="1" stop-color="#E9473C"></stop></linearGradient><linearGradient id="paint2_linear_3_624" x1="305.932" y1="155.953" x2="178.883" y2="225.381" gradientUnits="userSpaceOnUse"><stop stop-color="#292B2F"></stop><stop offset="0.0235" stop-color="#3A3E43"></stop><stop offset="0.0755" stop-color="#596369"></stop><stop offset="0.1331" stop-color="#75828A"></stop><stop offset="0.1951" stop-color="#8A9CA6"></stop><stop offset="0.2629" stop-color="#9CB3BC"></stop><stop offset="0.3384" stop-color="#AAC4CE"></stop><stop offset="0.425" stop-color="#B4D2DD"></stop><stop offset="0.5293" stop-color="#BCDDE8"></stop><stop offset="0.6697" stop-color="#C0E3ED"></stop><stop offset="1" stop-color="#C1E4EF"></stop></linearGradient><linearGradient id="paint3_linear_3_624" x1="183.804" y1="327.825" x2="183.804" y2="206.968" gradientUnits="userSpaceOnUse"><stop stop-color="#292B2F"></stop><stop offset="0.0235" stop-color="#3A3E43"></stop><stop offset="0.0755" stop-color="#596369"></stop><stop offset="0.1331" stop-color="#75828A"></stop><stop offset="0.1951" stop-color="#8A9CA6"></stop><stop offset="0.2629" stop-color="#9CB3BC"></stop><stop offset="0.3384" stop-color="#AAC4CE"></stop><stop offset="0.425" stop-color="#B4D2DD"></stop><stop offset="0.5293" stop-color="#BCDDE8"></stop><stop offset="0.6697" stop-color="#C0E3ED"></stop><stop offset="1" stop-color="#C1E4EF"></stop></linearGradient></defs></svg><!----> <svg viewBox="0 0 1154 550" fill="none" xmlns="http://www.w3.org/2000/svg" class="hidden h-14 w-auto dark:block" width="100%" height="100%" role="presentation" aria-hidden="true"><path d="M268.877 144.235C273.175 141.744 278.459 141.744 282.757 144.235L384.598 203.123C388.95 205.642 391.578 210.296 391.496 215.306L391.633 334.996C391.633 339.924 389.005 344.522 384.707 346.986L282.729 405.765C278.459 408.256 273.175 408.256 268.904 405.765L166.927 346.959C162.629 344.495 160 339.924 160 334.969V215.278C160 210.323 162.628 205.778 166.898 203.287L268.877 144.235ZM279.772 188.969C277.364 187.573 274.407 187.573 271.998 188.969L203.912 228.392C201.53 229.788 200.052 232.334 200.052 235.126V314.983C200.052 317.776 201.53 320.322 203.939 321.718L271.998 360.977C274.407 362.345 277.364 362.345 279.772 360.977L347.831 321.718C350.24 320.349 351.718 317.776 351.718 315.011L351.636 235.893V235.126C351.69 232.306 350.213 229.706 347.776 228.282L279.772 188.969ZM275.883 220.862C281.687 220.862 286.423 225.571 286.423 231.402C286.423 236.549 282.727 240.848 277.826 241.751V258.423H288.53C288.53 258.423 289.187 258.423 289.434 258.313C289.84 258.151 290.919 257.129 290.939 257.109L299.673 248.349C298.934 247.171 298.496 245.803 298.496 244.324C298.496 240.163 301.836 236.823 305.97 236.823C310.131 236.823 313.471 240.19 313.471 244.324C313.471 248.458 310.103 251.825 305.97 251.825C304.711 251.825 303.561 251.497 302.521 250.949L295.019 258.45C295.019 258.45 292.282 261.106 291.214 261.928C290.618 262.388 289.646 262.285 289.626 262.283H277.744V273.233H303.286C304.108 270.003 307.01 267.539 310.486 267.539C314.62 267.539 317.96 271.017 317.96 275.15C317.96 279.284 314.62 282.515 310.486 282.515C307.037 282.515 304.135 280.242 303.286 277.094H277.744V287.798H289.626C289.647 287.796 290.618 287.694 291.214 288.154C292.277 288.972 294.993 291.606 295.019 291.631L302.521 299.132C303.561 298.584 304.711 298.256 305.97 298.256C310.131 298.256 313.47 301.623 313.471 305.757C313.471 309.918 310.103 313.259 305.97 313.259C301.836 313.259 298.496 309.891 298.496 305.757C298.496 304.279 298.934 302.882 299.673 301.732L290.939 292.973C290.939 292.973 289.872 291.904 289.434 291.74C289.187 291.631 288.53 291.631 288.53 291.631H277.826V308.331C282.699 309.234 286.423 313.532 286.423 318.679C286.423 324.482 281.687 329.219 275.883 329.219C270.079 329.219 265.343 324.483 265.343 318.679C265.343 313.532 269.066 309.235 273.966 308.331V291.631H263.234C263.22 291.631 262.575 291.632 262.331 291.74C261.893 291.932 260.825 292.973 260.825 292.973L252.065 301.732C252.805 302.91 253.242 304.279 253.242 305.757C253.242 309.918 249.875 313.259 245.741 313.259C241.58 313.259 238.24 309.891 238.24 305.757C238.24 301.623 241.607 298.256 245.741 298.256C247 298.256 248.15 298.584 249.19 299.132L256.691 291.631C256.691 291.631 259.402 289.003 260.47 288.154C261.072 287.689 262.058 287.798 262.058 287.798H273.938V277.121H248.396C247.548 280.269 244.646 282.542 241.196 282.542C237.035 282.542 233.695 279.311 233.695 275.178C233.695 271.044 237.063 267.567 241.196 267.567C244.673 267.567 247.548 270.031 248.396 273.262H273.938V262.311H262.058C262.058 262.311 261.072 262.42 260.47 261.955C259.402 261.134 256.691 258.478 256.691 258.478L249.19 250.977C248.15 251.524 247 251.853 245.741 251.853C241.58 251.853 238.24 248.485 238.24 244.352C238.24 240.19 241.607 236.851 245.741 236.851C249.902 236.851 253.242 240.218 253.242 244.352C253.242 245.857 252.805 247.226 252.065 248.376L260.825 257.137C260.825 257.137 261.893 258.176 262.331 258.341C262.604 258.45 273.885 258.45 273.966 258.45V241.751C269.066 240.847 265.343 236.549 265.343 231.402C265.343 225.571 270.052 220.862 275.883 220.862ZM275.828 311.999C272.16 311.999 269.176 314.983 269.176 318.651C269.176 322.32 272.16 325.304 275.828 325.304C279.496 325.304 282.48 322.32 282.48 318.651C282.48 314.983 279.496 311.999 275.828 311.999ZM454.024 227.871C474.091 227.871 486.438 237.289 486.438 257.876V317.174C479.074 321.116 468.096 323.689 455.749 323.689C433.629 323.689 420.598 314.08 420.598 295.738C420.598 273.454 442.554 264.884 472.367 261.982V256.315C472.367 243.64 465.522 237.974 452.655 237.974C444.607 237.974 435.846 240.383 429.522 243.805L425.909 234.551C433.629 230.581 444.087 227.871 454.024 227.871ZM843.922 227.844C852.491 227.844 859.69 230.062 864.673 233.84L861.087 242.764C857.473 240.026 851.998 238.11 846.495 238.11C831.767 238.11 823.526 254.071 823.526 275.314C823.526 296.23 831.931 312.683 846.495 312.684C851.998 312.684 857.309 310.959 860.896 308.249L864.673 317.666C859.663 321.471 852.491 323.689 843.922 323.689C821.637 323.689 808.086 303.951 808.086 275.671C808.086 247.391 821.802 227.844 843.922 227.844ZM957.478 227.844C982.5 227.844 993.998 248.075 993.998 275.671C993.971 303.458 982.5 323.689 957.478 323.689C932.455 323.689 920.957 303.458 920.957 275.671C920.957 248.075 932.428 227.844 957.478 227.844ZM609.742 229.568H625.866V239.014H609.742V299.516C609.742 307.564 613.684 312.383 621.24 312.383C622.965 312.383 624.498 312.218 625.866 311.698V321.308C623.457 322.32 620.363 322.84 616.777 322.84C603.582 322.84 594.657 314.792 594.657 299.516V239.014H584.035V229.568H594.657V208.324L609.742 203.67V229.568ZM538.069 227.844C562.927 227.844 573.904 238.63 573.904 258.177V321.965H558.82V258.204C558.82 244.325 553.153 237.453 538.069 237.453C531.718 237.453 526.57 238.494 521.779 240.547V321.965H506.695V234.359C515.264 230.417 526.571 227.844 538.069 227.844ZM725.955 227.844C748.595 227.844 758.533 240.027 758.533 257.657V321.965H743.612V257.521C743.612 245.338 738.137 237.453 724.586 237.453C717.03 237.453 711.035 240.875 706.6 246.214V321.965H691.68V255.111C691.68 244.489 685.848 237.426 672.16 237.426C665.124 237.426 659.977 238.302 654.83 240.52V321.965H639.91V234.359C648.835 230.417 659.101 227.844 671.612 227.844C685.492 227.844 693.377 231.622 699.372 238.63C705.532 231.95 714.977 227.844 725.955 227.844ZM794.042 321.965H778.957V229.568H794.042V321.965ZM910.749 227.844C914.198 227.844 917.949 228.173 918.798 228.337L915.376 239.698C912.638 238.658 909.38 238.138 905.958 238.138C901.852 238.138 897.554 238.822 894.296 240.547V321.965H879.211V234.359C887.095 230.417 897.554 227.844 910.749 227.844ZM472.367 269.84C448.878 272.577 434.998 279.093 434.998 295.382C434.998 307.893 442.718 314.929 457.118 314.929C462.949 314.929 468.781 313.724 472.367 311.835V269.84ZM957.478 237.453C941.38 237.453 936.042 254.782 936.042 275.342C936.042 295.902 941.38 313.56 957.478 313.56C973.602 313.559 978.913 295.902 978.913 275.342C978.913 254.782 973.575 237.453 957.478 237.453ZM245.687 302.034C243.661 302.034 242.018 303.676 242.018 305.702C242.018 307.728 243.661 309.371 245.687 309.371C247.712 309.371 249.354 307.728 249.354 305.702C249.354 303.677 247.712 302.034 245.687 302.034ZM305.942 302.034C303.917 302.034 302.274 303.676 302.273 305.702C302.273 307.728 303.917 309.371 305.942 309.371C307.968 309.371 309.61 307.728 309.61 305.702C309.61 303.677 307.968 302.034 305.942 302.034ZM310.486 271.372C308.488 271.372 306.818 273.015 306.818 275.041C306.819 277.067 308.461 278.709 310.486 278.709C312.512 278.709 314.155 277.067 314.155 275.041C314.155 273.015 312.512 271.372 310.486 271.372ZM241.114 271.345C239.088 271.345 237.446 272.988 237.446 275.014C237.446 277.039 239.089 278.682 241.114 278.682C243.14 278.682 244.783 277.039 244.783 275.014C244.783 272.988 243.14 271.345 241.114 271.345ZM305.942 240.684C303.917 240.684 302.273 242.326 302.273 244.352C302.273 246.377 303.917 248.021 305.942 248.021C307.968 248.02 309.61 246.377 309.61 244.352C309.61 242.326 307.968 240.684 305.942 240.684ZM245.687 240.655C243.661 240.655 242.018 242.298 242.018 244.324C242.018 246.35 243.661 247.992 245.687 247.992C247.712 247.992 249.354 246.35 249.354 244.324C249.354 242.298 247.712 240.655 245.687 240.655ZM275.828 224.723C272.16 224.723 269.148 227.707 269.176 231.375C269.176 235.043 272.16 238.027 275.828 238.027C279.496 238.027 282.48 235.043 282.48 231.375C282.48 227.707 279.496 224.723 275.828 224.723Z" fill="white"></path></svg><!----></a> <nav aria-label="Social media links"><div class="flex gap-3"><!--[--><a href="https://www.linkedin.com/company/antmicro-ltd" target="_blank" rel="noopener noreferrer" class="inline-flex size-8 items-center justify-center rounded-md border border-border/60 text-foreground-muted transition-colors hover:border-border hover:bg-surface hover:text-foreground" aria-label="Visit Antmicro on LinkedIn"><!--[-1--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide lucide-linkedin size-4"><!--[--><!----><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"><!----></path><!----><!----><rect width="4" height="12" x="2" y="9"><!----></rect><!----><!----><circle cx="4" cy="4" r="2"><!----></circle><!----><!--]--><!----><!----></svg><!--]--></a><a href="https://www.twitter.com/antmicro" target="_blank" rel="noopener noreferrer" class="inline-flex size-8 items-center justify-center rounded-md border border-border/60 text-foreground-muted transition-colors hover:border-border hover:bg-surface hover:text-foreground" aria-label="Visit Antmicro on X"><!--[0--><svg viewBox="0 0 24 24" class="size-4 fill-current" aria-hidden="true"><path d="M18.901 2.25h3.681l-8.041 9.188 9.46 12.312h-7.406l-5.8-7.471-6.535 7.471H.577l8.6-9.83L.104 2.25h7.594l5.242 6.78L18.901 2.25Zm-1.291 19.299h2.04L6.597 4.336H4.408L17.61 21.549Z"></path></svg><!--]--></a><a href="https://www.github.com/antmicro" target="_blank" rel="noopener noreferrer" class="inline-flex size-8 items-center justify-center rounded-md border border-border/60 text-foreground-muted transition-colors hover:border-border hover:bg-surface hover:text-foreground" aria-label="Visit Antmicro on GitHub"><!--[1--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide lucide-github size-4"><!--[--><!----><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"><!----></path><!----><!----><path d="M9 18c-4.51 2-5-2-7-2"><!----></path><!----><!--]--><!----><!----></svg><!--]--></a><!--]--></div></nav> <p class="mt-auto text-xs text-foreground-muted">© 2026 Antmicro</p></div> <nav class="flex flex-1 flex-col gap-x-12 gap-y-8 md:flex-row md:flex-wrap" aria-label="Footer navigation"><!--[--><div class="shrink-0"><h2 class="mb-4 text-sm font-medium tracking-tight text-foreground">Areas</h2> <ul class="space-y-2"><!--[--><li><a href="https://antmicro.com/areas/robotics-and-drones" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Robotics and Drones</a></li><li><a href="https://antmicro.com/areas/industry-and-transportation" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Industry and Transportation</a></li><li><a href="https://antmicro.com/areas/security-and-access-control" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Security and Access Control</a></li><li><a href="https://antmicro.com/areas/lab-and-measurement" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Lab and Measurement</a></li><li><a href="https://antmicro.com/areas/defense-and-aerospace" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Defense and Aerospace</a></li><!--]--></ul></div><div class="shrink-0"><h2 class="mb-4 text-sm font-medium tracking-tight text-foreground">Technologies</h2> <ul class="space-y-2"><!--[--><li><a href="https://antmicro.com/technologies/fpga" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">FPGA</a></li><li><a href="https://antmicro.com/technologies/cpu-gpu" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">CPU/GPU systems</a></li><li><a href="https://antmicro.com/technologies/risc-v" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">RISC-V</a></li><li><a href="https://antmicro.com/technologies/iot" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">IoT</a></li><li><a href="https://antmicro.com/technologies/hmi" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">HMI</a></li><li><a href="https://antmicro.com/technologies/vision-systems" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Vision Systems</a></li><!--]--></ul></div><div class="shrink-0"><h2 class="mb-4 text-sm font-medium tracking-tight text-foreground">Services</h2> <ul class="space-y-2"><!--[--><li><a href="https://antmicro.com/services/software-and-bsps" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Software and BSPs</a></li><li><a href="https://antmicro.com/services/cloud" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Cloud</a></li><li><a href="https://antmicro.com/services/product-development" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Product Development</a></li><li><a href="https://antmicro.com/services/hardware-design" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Hardware Design</a></li><li><a href="https://antmicro.com/asic-design-productivity/" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">ASIC Design Productivity</a></li><li><a href="https://antmicro.com/services/edge-ai" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Edge AI</a></li><!--]--></ul></div><div class="shrink-0"><h2 class="mb-4 text-sm font-medium tracking-tight text-foreground">Platforms</h2> <ul class="space-y-2"><!--[--><li><a href="https://antmicro.com/nvidia-jetson/" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">NVIDIA® Jetson™ services</a></li><li><a href="https://antmicro.com/platforms/ultrascale-processing-module" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Ultrascale Processing Module</a></li><li><a href="https://antmicro.com/platforms/custom-camera-platforms" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Custom Camera</a></li><li><a href="https://antmicro.com/platforms/memory-testing-platforms" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Memory Testing</a></li><li><a href="https://antmicro.com/platforms/dc-scm-open-source-bmc-platforms/" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">OCP DC-SCM</a></li><li><a href="https://antmicro.com/platforms/industrial-android" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Industrial Android</a></li><li><a href="../platforms/renode" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Renode</a></li><li><a href="https://antmicro.com/kenning/" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Kenning</a></li><!--]--></ul></div><div class="shrink-0"><h2 class="mb-4 text-sm font-medium tracking-tight text-foreground">Company</h2> <ul class="space-y-2"><!--[--><li><a href="https://antmicro.com/blog/" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Blog</a></li><li><a href="../about/contact/" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Contact</a></li><li><a href="https://antmicro.com/about/partners" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Partners</a></li><li><a href="https://antmicro.com/about/resources" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Resources</a></li><li><a href="https://antmicro.com/about/company" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">About</a></li><li><a href="https://antmicro.com/about/careers" class="text-sm text-foreground-muted transition-colors hover:text-foreground" target="_blank" rel="noopener noreferrer">Careers</a></li><!--]--></ul></div><!--]--></nav></div></div></footer><!----><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
+			
+			
+		</div>
+	<!-- Podgląd partnera: panel z prawej (na telefonie wysuwany od dołu). Sterowanie: partners.js -->
+<div class="pp" hidden>
+  <div class="pp__backdrop" data-close></div>
+  <div class="pp__card" role="dialog" aria-modal="true" aria-labelledby="pp-title">
+
+    <div class="pp__bar">
+      <div class="pp__crumbs">
+        <span class="pp__tag"></span>
+        <span class="pp__count"></span>
+      </div>
+      <div class="pp__nav">
+        <button type="button" class="pp__btn" data-prev aria-label="Previous partner">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button type="button" class="pp__btn" data-next aria-label="Next partner">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <button type="button" class="pp__btn" data-close aria-label="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="pp__scroll">
+      <div class="pp__logo"><img alt=""></div>
+      <div class="pp__body">
+        <h3 class="pp__title" id="pp-title"></h3>
+        <div class="pp__text"></div>
+      </div>
+    </div>
+
+    <a class="pp__link" target="_blank" rel="noopener noreferrer">
+      <span class="pp__link-label">Visit website</span>
+      <span class="pp__link-url"></span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- Pasek prototypu: przełączanie układu. Do usunięcia w wersji produkcyjnej. -->
+<div class="proto-bar" role="toolbar" aria-label="Prototype variants">
+  <div class="proto-bar__group">
+    <span class="proto-bar__label">Hero</span>
+    <div class="proto-bar__seg" data-control="hero">
+      <button type="button" data-value="orbit">Orbits</button>
+      <button type="button" data-value="dither">Dither</button>
+      <button type="button" data-value="pcb">PCB</button>
+    </div>
+  </div>
+  <div class="proto-bar__group">
+    <span class="proto-bar__label">Hero color</span>
+    <div class="proto-bar__seg" data-control="tint">
+      <button type="button" data-value="mono">Mono</button>
+      <button type="button" data-value="accent">Accent</button>
+    </div>
+  </div>
+  <div class="proto-bar__group">
+    <span class="proto-bar__label">Grid layout</span>
+    <div class="proto-bar__seg" data-control="layout">
+      <button type="button" data-value="bento">Bento</button>
+      <button type="button" data-value="equal">Equal</button>
+    </div>
+  </div>
+  <div class="proto-bar__group">
+    <span class="proto-bar__label">Figma export</span>
+    <div class="proto-bar__seg" data-control="figma" title="Figma export mode. Press H to hide this bar.">
+      <button type="button" data-value="off">Off</button>
+      <button type="button" data-value="on">On</button>
+    </div>
+  </div>
+  <div class="proto-bar__group">
+    <span class="proto-bar__label">Partner preview</span>
+    <div class="proto-bar__seg" data-control="preview">
+      <button type="button" data-value="drawer">A · Panel</button>
+      <button type="button" data-value="overlay">B · In grid</button>
+    </div>
+  </div>
+</div>
+
+<script type="application/json" id="partners-data">[{"name": "NVIDIA", "category": "Silicon", "logo": "logos/trim/partner-nvidia.svg", "logoW": 145, "logoH": 107, "url": "https://www.nvidia.com", "description": ["As an NVIDIA® Jetson™ Ecosystem Partner, Antmicro helps customers build tailored products featuring NVIDIA technology and helps deliver successful projects in shorter time, especially in the area of edge AI and vision.", "Antmicro has helped build a wide range of high-performance customer solutions and reference designs with the Tegra® and Jetson line of CPUs and is a frequent co-exhibitor and speaker at NVIDIA events."]}, {"name": "Analog Devices", "category": "Silicon", "logo": "logos/trim/partner-analog-devices.svg", "logoW": 234, "logoH": 66, "url": "https://www.analog.com", "description": ["Analog Devices Inc. (ADI) is a provider of mixed-signal and digital signal processing boards used primarily in edge embedded applications. ADI and Antmicro jointly developed AutoML for Embedded, an open source tool built on the Kenning framework, and Zephelin, a tracing module for the Zephyr RTOS, which enable AI model size prediction for resource-constrained MCUs, and traces for in-depth insight into apps, allowing the developers to easily design, test, deploy, monitor and optimize their AI models."]}, {"name": "Ambiq", "category": "Silicon", "logo": "logos/trim/partner-ambiq.svg", "logoW": 232, "logoH": 67, "url": "https://ambiq.com", "description": ["Ambiq is a US-based System-on-Chip vendor, leveraging ultra-low power technology to provide solutions for wireless-enabled designs for IoT endpoints such as smart home appliances, far-field voice remotes, and wearables. Antmicro's collaboration with Ambiq includes support for Ambiq Apollo4 Blue in Renode, Antmicro's open source simulation framework, enabling the development of both single devices and complete, interconnected systems."]}, {"name": "Aethero", "category": "Space", "logo": "logos/trim/partner-aethero.svg", "logoW": 300, "logoH": 50, "url": "https://aethero.org", "description": ["Aethero, the disruptive designer and manufacturer of high-end computers partners with Antmicro in the rapid development of flight-ready, state-of-the-art modular edge computers for the purpose of performing computationally heavy data processing in space. The first product of their collaboration, the Aethero NxN Edge Computing Module, is the first space edge computer to achieve 100 TOPS of compute power using commercially available NVIDIA Jetson platforms."]}, {"name": "Allied Vision", "category": "Vision", "logo": "logos/trim/partner-allied.svg", "logoW": 285, "logoH": 54, "url": "https://www.alliedvision.com", "description": ["Allied Vision delivers camera solutions for industrial inspection, medical and scientific imaging, traffic monitoring and many more applications. Antmicro works closely with Allied Vision around their ALVIUM camera product line with integrated ISP, helping build the camera software stack for embedded devices from other Antmicro partners like NVIDIA, NXP and Toradex."]}, {"name": "apertus°", "category": "Vision", "logo": "logos/trim/partner-apertus.svg", "logoW": 206, "logoH": 75, "url": "https://www.apertus.org", "description": ["Apertus is an organisation dedicated to creating a professional, community-driven, free software (FLOSS) and open hardware range of digital filmmaking tools. Thanks to our FPGA+SoC and open source technologies experience, Antmicro is a member of the consortium that successfully delivered the world's first open 4K modular camera, the AXIOM Gamma and cooperates with Apertus to make open-source filmmaking a reality."]}, {"name": "RISC-V International", "category": "Open source", "logo": "logos/trim/partner-risc.svg", "logoW": 300, "logoH": 50, "url": "https://riscv.org", "description": ["RISC-V is an instruction set architecture (ISA) set to become a standard open architecture for industry implementations under the governance of the RISC-V International. As a Strategic Founding Member of the RISC-V International, Antmicro works to strengthen the software ecosystem of RISC-V, collaborating with parties such as Google, Microchip, NXP, Western Digital and Thales. With tools like the Renode simulation framework, proven FPGA implementations and comprehensive development services, Antmicro drives adoption of RISC-V in real-world applications."]}, {"name": "CHIPS Alliance", "category": "Open source", "logo": "logos/trim/partner-chips.svg", "logoW": 215, "logoH": 72, "url": "https://www.chipsalliance.org", "description": ["The CHIPS Alliance develops high-quality, open source hardware designs relevant to silicon devices and FPGA projects. As Platinum members, Antmicro takes a leading role in the direction of the Alliance, alongside well-known industry players such as AMD, Intel, Microsoft and SiFive. Antmicro also heads the F4PGA and the Tools Workgroups within the CHIPS Alliance."]}, {"name": "CircuitHub", "category": "Manufacturing", "logo": "logos/trim/partner-circuithub.svg", "logoW": 291, "logoH": 53, "url": "https://order.openhardware.antmicro.com", "description": ["CircuitHub are an official distributor of Antmicro's hardware products, including the Jetson Orin Baseboard. As a provider of rapid, low cost manufacturing for fast moving companies, CircuitHub works with Antmicro to quickly produce our hardware products on demand."]}, {"name": "Enclustra", "category": "Modules", "logo": "logos/trim/partner-enclustra.svg", "logoW": 148, "logoH": 105, "url": "https://www.enclustra.com", "description": ["Enclustra is a Swiss FPGA design house and module vendor for FPGA and FPGA+SoC modules. Antmicro cooperates with Enclustra since 2012, providing software services in BSP and application development, including creating the buildsystem/BSP generator for Enclustra's wide SoM portfolio spanning various FPGA SoC products from Intel and Xilinx used by thousands of customers worldwide."]}, {"name": "FRAMOS", "category": "Vision", "logo": "logos/trim/partner-framos.svg", "logoW": 121, "logoH": 120, "url": "https://www.framos.com", "description": ["FRAMOS® is the leading global expert in vision systems, dedicated to innovation and excellence in enabling devices to see and think. Antmicro has partnered with FRAMOS to provide hardware and software engineering services and integration of FRAMOS sensor modules into real-life products."]}, {"name": "Microchip", "category": "Silicon", "logo": "logos/trim/partner-microchip.svg", "logoW": 159, "logoH": 97, "url": "https://www.microchip.com", "description": ["Microchip, a fellow RISC-V Platinum Founding Member, is a leading provider of semiconductor solutions and offers a comprehensive portfolio of semiconductor and system solutions for aerospace & defense, communications, data center and industrial markets. Antmicro and Microchip have been collaborating to develop support for Microchip's RISC-V based platforms and integration with Microchip's SoftConsole IDE for the Renode open source simulation framework."]}, {"name": "Lattice Semiconductor", "category": "Silicon", "logo": "logos/trim/partner-lattice.svg", "logoW": 300, "logoH": 49, "url": "https://www.latticesemi.com", "description": ["Lattice Semiconductor specializes in the field of low power, small size factor FPGAs and easy-to-use software tools for designers in automotive, industrial, computing, and other fields. Antmicro leverages CrossLink-NX, ECP5, and other devices from Lattice to create open hardware FPGA platforms for embedded AI, edge computing, and other applications. A notable result of this collaboration is the BMC-oriented DC-SCM reference platform based on an open source OSM-L SoM employing a Lattice CertusPro-NX FPGA."]}, {"name": "NXP", "category": "Silicon", "logo": "logos/trim/partner-nxp.svg", "logoW": 212, "logoH": 73, "url": "https://www.nxp.com", "description": ["NXP Semiconductors is a global semiconductor company specializing in the industrial and automotive sectors. As an official NXP Partner, Antmicro provides software and hardware services as well as open source tooling for NXP's i.MX application processors, i.MX RT crossover MCUs and other SoCs, including building entire devices based on Linux, Android and Zephyr RTOS. The companies have been co-exhibiting at leading industry events and collaborating as members of industry organizations such as the Zephyr Project."]}, {"name": "QuickLogic", "category": "Silicon", "logo": "logos/trim/partner-quicklogic.svg", "logoW": 285, "logoH": 54, "url": "https://www.quicklogic.com", "description": ["QuickLogic develops low power multi-core semiconductor platforms, Intellectual Property for AI and voice and sensor processing. Their solutions include eFPGA IP and heterogeneous multi-core SoCs. Antmicro is collaborating with QuickLogic to provide an open source ecosystem for their FPGA/FPGA SoC EOS S3/PP3E family, with open hardware boards, Renode simulation and Zephyr support to expand QuickLogic's user base."]}, {"name": "Renesas", "category": "Silicon", "logo": "logos/trim/partner-renesas.svg", "logoW": 300, "logoH": 48, "url": "https://www.renesas.com", "description": ["Renesas Electronics Corporation are a major supplier to the automotive industry, and in partnership with Antmicro, Renode now features support for multiple Renesas SoCs and microcontrollers based on ARM Cortex cores."]}, {"name": "RISE", "category": "Research", "logo": "logos/trim/partner-sics.svg", "logoW": 93, "logoH": 120, "url": "https://www.ri.se", "description": ["RISE (formerly the Swedish Institute of Computer Science) is a world-renowned research institution, specializing in networked, memory- and battery constrained systems. Antmicro's Swedish office is co-located at RISE's Level-6 as a result of our close cooperation in the area of the Internet of Things."]}, {"name": "Zephyr Project", "category": "Open source", "logo": "logos/trim/partner-zephyr.svg", "logoW": 178, "logoH": 87, "url": "https://www.zephyrproject.org", "description": ["Zephyr is a scalable, real-time operating system (RTOS) set to become the open standard for resource constrained devices and consequently the IoT ecosystem at large. Antmicro's long contribution and experience in building commercial implementations of this open RTOS for customers globally have made our membership in the Zephyr Project a natural choice.", "Renode, Antmicro's open source emulation framework, is a recommended development tool for Zephyr. Antmicro is also the official maintainer of RISC-V in the Zephyr Project."]}, {"name": "The Linux Foundation", "category": "Open source", "logo": "logos/trim/partner-linux.svg", "logoW": 217, "logoH": 71, "url": "https://www.linuxfoundation.org", "description": ["The Linux Foundation is the largest open source non-profit organization and home to some of the world's most important and lively technology initiatives, to which Antmicro is a frequent contributor since many years. To underline this long-term commitment to projects under the umbrella of the LF, Antmicro joined the organization as Silver Member in August 2018."]}, {"name": "SiFive", "category": "Silicon", "logo": "logos/trim/partner-sifive.svg", "logoW": 215, "logoH": 72, "url": "https://www.sifive.com", "description": ["SiFive is a fabless semiconductor founded by the creators of the free and open RISC-V architecture. Antmicro and SiFive propose a complete RISC-V offering with SiFive providing ASIC design services and Antmicro - software, tooling and FPGA support.", "SiFive silicon is also supported in Renode, Antmicro's open source simulation framework, allowing our mutual customers to design entire devices based on custom RISC-V chips.", "Both SiFive and Antmicro are Platinum Founding Members of the RISC-V Foundation with a shared philosophy on open source and how it will drive the future of computer engineering."]}, {"name": "Silicon Labs", "category": "Silicon", "logo": "logos/trim/partner-silabs.svg", "logoW": 180, "logoH": 86, "url": "https://www.silabs.com", "description": ["Antmicro has been working with Silicon Labs MCUs for many years. We are a member of the Silicon Labs Design Network and help customers build next-gen products based on a wide variety of Silicon Labs MCUs. Antmicro's open multi-node simulation framework, Renode, supports a broad range of EFR32 and EFM32 chips."]}, {"name": "SolidRun", "category": "Modules", "logo": "logos/trim/partner-solidrun.svg", "logoW": 222, "logoH": 70, "url": "https://www.solid-run.com", "description": ["SolidRun is a manufacturer of embedded system components and network solutions with a focus on energy-efficient, powerful, and flexible products. They are known for their compact embedded solutions based on ARM and x86 architectures, including SOMs (System-on-Module), SBCs (Single Board Computers), and industrial mini PCs. Antmicro helps provide Android BSP development services for SolidRun customers."]}, {"name": "STMicroelectronics", "category": "Silicon", "logo": "logos/trim/partner-st.svg", "logoW": 123, "logoH": 120, "url": "https://www.st.com", "description": ["STMicroelectronics is a global semiconductor company serving a wide array of electronic segments. Their 32-bit ARM microcontroller power many devices of what is to become the Internet of Things. Antmicro cooperates with ST in third party SW/HW services."]}, {"name": "Thales", "category": "Aerospace", "logo": "logos/trim/partner-thales.svg", "logoW": 300, "logoH": 36, "url": "https://www.thalesgroup.com", "description": ["With 64,000 employees in 56 countries, Thales develops high technology solutions for critical industries such as space, railway, defense and cybersecurity. Antmicro partners with Thales, a fellow RISC-V Foundation member, around the disruptive RISC-V open processor architecture, helping the technology prime in the adoption of open source software, hardware and silicon."]}, {"name": "Toradex", "category": "Modules", "logo": "logos/trim/partner-toradex.svg", "logoW": 260, "logoH": 60, "url": "https://www.toradex.com", "description": ["Toradex, a Swiss System on Module (SoM) provider, specializes in high-quality, low-cost embedded ARM modules and baseboards. From low-power, through heterogeneous up to high performance modules, since 2010 Antmicro provides third party software (Linux and Android) and hardware support and development kits for Toradex modules, and often collaborates in building demonstrators of Toradex technology as well as maintaining and developing the official Toradex BSPs."]}]</script>
+<script src="partners.js?v=1795512431"></script>
+<script src="orbit.js?v=1795512431"></script>
+<script src="hero-dither.js?v=1795512431"></script>
+<script src="pcb.js?v=1795512431"></script>
+<script>
+  /* Zastępuje hydrację SvelteKit w podglądzie: przełącznik motywu w nagłówku. */
+  (function () {
+    var btn = document.querySelector('header button[aria-label="Toggle color theme"]');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var dark = document.documentElement.classList.toggle('dark');
+      document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+      try { localStorage.setItem('mode-watcher-mode', dark ? 'dark' : 'light'); } catch (e) {}
+    });
+  })();
+</script>
+
+</body>
+</html>

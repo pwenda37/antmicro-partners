@@ -1,0 +1,77 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hero concepts</title><style>
+:root{--bg:#000;--fg:#e9e9e9;--mut:#9a9a9a;--line:rgba(80,80,80,.6);--blue:oklch(66% .19 252)}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif}
+.cap{max-width:1280px;margin:40px auto 12px;padding:0 4px;font:500 12px/1 ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.hero{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:5fr 7fr;border:1px solid var(--line);border-radius:16px 16px 0 0;min-height:560px;overflow:hidden}
+.txt{padding:72px 48px}.tags{display:flex;gap:8px;margin-bottom:24px}.tags span{border:1px solid var(--line);border-radius:99px;padding:4px 10px;font:500 11px ui-monospace,monospace;letter-spacing:.06em}
+h1{font-size:40px;line-height:1.15;font-weight:500;letter-spacing:-.01em;margin:0 0 16px}p{color:var(--mut);font-size:14px;line-height:1.7;max-width:46ch;margin:0 0 28px}
+.btn{display:inline-block;padding:12px 22px;border-radius:99px;font-size:13px;margin-right:10px;border:1px solid var(--line)}.btn--w{background:var(--fg);color:#000;border-color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:1px;background:var(--line);border-left:1px solid var(--line)}
+.t{background:#000;display:grid;place-items:center;position:relative}.t img{width:78%;opacity:.95}
+.t--dither img{opacity:.35}.t--dither::after{content:"";position:absolute;inset:0;background:url(/about/contact/dither-light.png) 0 0/160px;opacity:.55;mix-blend-mode:screen;-webkit-mask:linear-gradient(90deg,#000 0,#000 55%,transparent 56%);mask:linear-gradient(90deg,#000 0,#000 55%,transparent 56%)}
+.t--hi{background:#f3f3f3}.t--hi img{filter:invert(1);opacity:.9}
+.pcbwrap{position:relative;border-left:1px solid var(--line);background:url(/about/contact/dither-dark.png) 0 0/320px}
+.pcbwrap svg{position:absolute;inset:0;width:100%;height:100%}
+.tr{fill:none;stroke:#3c3c3c;stroke-width:2}.tr--b{stroke:var(--blue);stroke-width:2.4}
+.pkg{fill:#0b0b0b;stroke:#5a5a5a;stroke-width:1.2}.pin{fill:#5a5a5a}
+.lbl{fill:#cfcfcf;font:500 11px ui-monospace,monospace;letter-spacing:.1em;text-anchor:middle}
+.core{fill:#111;stroke:#bdbdbd;stroke-width:1.5}.hex{fill:none;stroke:#e9e9e9;stroke-width:2}
+.pulse{fill:var(--blue)}.pulse-ring{fill:none;stroke:var(--blue);stroke-opacity:.45}
+</style></head><body>
+<div class="cap">Koncepcja 2 · siatka bento jako hero (logotypy podmieniają się przez dither)</div>
+<section class="hero"><div class="txt"><div class="tags"><span>PARTNERS</span><span>ECOSYSTEM</span></div>
+<h1>Building open, software-driven systems together with industry leaders</h1>
+<p>We collaborate with silicon vendors, hardware manufacturers, open source foundations and research institutions.</p>
+<span class="btn btn--w">Become a partner</span><span class="btn">See our partners</span></div><div class="grid"><div class="t"><img src="../partners/logos/flat-dark/partner-nvidia.svg" alt=""></div>
+<div class="t"><img src="../partners/logos/flat-dark/partner-analog-devices.svg" alt=""></div>
+<div class="t"><img src="../partners/logos/flat-dark/partner-ambiq.svg" alt=""></div>
+<div class="t"><img src="../partners/logos/flat-dark/partner-aethero.svg" alt=""></div>
+<div class="t"><img src="../partners/logos/flat-dark/partner-allied.svg" alt=""></div>
+<div class="t t--dither"><img src="../partners/logos/flat-dark/partner-apertus.svg" alt=""></div>
+<div class="t"><img src="../partners/logos/flat-dark/partner-risc.svg" alt=""></div>
+<div class="t"><img src="../partners/logos/flat-dark/partner-chips.svg" alt=""></div>
+<div class="t"><img src="../partners/logos/flat-dark/partner-circuithub.svg" alt=""></div>
+<div class="t t--hi"><img src="../partners/logos/flat-dark/partner-enclustra.svg" alt=""></div>
+<div class="t"><img src="../partners/logos/flat-dark/partner-framos.svg" alt=""></div>
+<div class="t"><img src="../partners/logos/flat-dark/partner-microchip.svg" alt=""></div></div></section>
+<div class="cap">Koncepcja 3 · płytka PCB: partnerzy jako układy wpięte w chip Antmicro, niebieskie impulsy na ścieżkach</div>
+<section class="hero"><div class="txt"><div class="tags"><span>PARTNERS</span><span>ECOSYSTEM</span></div>
+<h1>Building open, software-driven systems together with industry leaders</h1>
+<p>We collaborate with silicon vendors, hardware manufacturers, open source foundations and research institutions.</p>
+<span class="btn btn--w">Become a partner</span><span class="btn">See our partners</span></div><div class="pcbwrap"><svg viewBox="0 0 760 520" preserveAspectRatio="xMidYMid meet"><path d="M205 97 V235 H360" class="tr"/>
+<path d="M215 97 V245 H360" class="tr tr--b"/>
+<path d="M225 97 V255 H360" class="tr"/>
+<path d="M515 87 V235 H360" class="tr"/>
+<path d="M525 87 V245 H360" class="tr"/>
+<path d="M535 87 V255 H360" class="tr"/>
+<path d="M645 177 V235 H360" class="tr"/>
+<path d="M655 177 V245 H360" class="tr"/>
+<path d="M665 177 V255 H360" class="tr"/>
+<path d="M665 357 V235 H360" class="tr"/>
+<path d="M675 357 V245 H360" class="tr tr--b"/>
+<path d="M685 357 V255 H360" class="tr"/>
+<path d="M515 447 V235 H360" class="tr"/>
+<path d="M525 447 V245 H360" class="tr"/>
+<path d="M535 447 V255 H360" class="tr"/>
+<path d="M215 447 V235 H360" class="tr"/>
+<path d="M225 447 V245 H360" class="tr"/>
+<path d="M235 447 V255 H360" class="tr"/>
+<path d="M85 347 V235 H360" class="tr"/>
+<path d="M95 347 V245 H360" class="tr tr--b"/>
+<path d="M105 347 V255 H360" class="tr"/>
+<path d="M85 177 V235 H360" class="tr"/>
+<path d="M95 177 V245 H360" class="tr"/>
+<path d="M105 177 V255 H360" class="tr"/>
+<rect x="170" y="65" width="5" height="5" class="pin"/><rect x="170" y="124" width="5" height="5" class="pin"/><rect x="182" y="65" width="5" height="5" class="pin"/><rect x="182" y="124" width="5" height="5" class="pin"/><rect x="194" y="65" width="5" height="5" class="pin"/><rect x="194" y="124" width="5" height="5" class="pin"/><rect x="206" y="65" width="5" height="5" class="pin"/><rect x="206" y="124" width="5" height="5" class="pin"/><rect x="218" y="65" width="5" height="5" class="pin"/><rect x="218" y="124" width="5" height="5" class="pin"/><rect x="230" y="65" width="5" height="5" class="pin"/><rect x="230" y="124" width="5" height="5" class="pin"/><rect x="242" y="65" width="5" height="5" class="pin"/><rect x="242" y="124" width="5" height="5" class="pin"/><rect x="254" y="65" width="5" height="5" class="pin"/><rect x="254" y="124" width="5" height="5" class="pin"/><rect x="160" y="70" width="110" height="54" rx="3" class="pkg"/><text x="215" y="101" class="lbl">NVIDIA</text>
+<rect x="480" y="55" width="5" height="5" class="pin"/><rect x="480" y="114" width="5" height="5" class="pin"/><rect x="492" y="55" width="5" height="5" class="pin"/><rect x="492" y="114" width="5" height="5" class="pin"/><rect x="504" y="55" width="5" height="5" class="pin"/><rect x="504" y="114" width="5" height="5" class="pin"/><rect x="516" y="55" width="5" height="5" class="pin"/><rect x="516" y="114" width="5" height="5" class="pin"/><rect x="528" y="55" width="5" height="5" class="pin"/><rect x="528" y="114" width="5" height="5" class="pin"/><rect x="540" y="55" width="5" height="5" class="pin"/><rect x="540" y="114" width="5" height="5" class="pin"/><rect x="552" y="55" width="5" height="5" class="pin"/><rect x="552" y="114" width="5" height="5" class="pin"/><rect x="564" y="55" width="5" height="5" class="pin"/><rect x="564" y="114" width="5" height="5" class="pin"/><rect x="470" y="60" width="110" height="54" rx="3" class="pkg"/><text x="525" y="91" class="lbl">NXP</text>
+<rect x="610" y="145" width="5" height="5" class="pin"/><rect x="610" y="204" width="5" height="5" class="pin"/><rect x="622" y="145" width="5" height="5" class="pin"/><rect x="622" y="204" width="5" height="5" class="pin"/><rect x="634" y="145" width="5" height="5" class="pin"/><rect x="634" y="204" width="5" height="5" class="pin"/><rect x="646" y="145" width="5" height="5" class="pin"/><rect x="646" y="204" width="5" height="5" class="pin"/><rect x="658" y="145" width="5" height="5" class="pin"/><rect x="658" y="204" width="5" height="5" class="pin"/><rect x="670" y="145" width="5" height="5" class="pin"/><rect x="670" y="204" width="5" height="5" class="pin"/><rect x="682" y="145" width="5" height="5" class="pin"/><rect x="682" y="204" width="5" height="5" class="pin"/><rect x="694" y="145" width="5" height="5" class="pin"/><rect x="694" y="204" width="5" height="5" class="pin"/><rect x="600" y="150" width="110" height="54" rx="3" class="pkg"/><text x="655" y="181" class="lbl">LATTICE</text>
+<rect x="630" y="325" width="5" height="5" class="pin"/><rect x="630" y="384" width="5" height="5" class="pin"/><rect x="642" y="325" width="5" height="5" class="pin"/><rect x="642" y="384" width="5" height="5" class="pin"/><rect x="654" y="325" width="5" height="5" class="pin"/><rect x="654" y="384" width="5" height="5" class="pin"/><rect x="666" y="325" width="5" height="5" class="pin"/><rect x="666" y="384" width="5" height="5" class="pin"/><rect x="678" y="325" width="5" height="5" class="pin"/><rect x="678" y="384" width="5" height="5" class="pin"/><rect x="690" y="325" width="5" height="5" class="pin"/><rect x="690" y="384" width="5" height="5" class="pin"/><rect x="702" y="325" width="5" height="5" class="pin"/><rect x="702" y="384" width="5" height="5" class="pin"/><rect x="714" y="325" width="5" height="5" class="pin"/><rect x="714" y="384" width="5" height="5" class="pin"/><rect x="620" y="330" width="110" height="54" rx="3" class="pkg"/><text x="675" y="361" class="lbl">MICROCHIP</text>
+<rect x="480" y="415" width="5" height="5" class="pin"/><rect x="480" y="474" width="5" height="5" class="pin"/><rect x="492" y="415" width="5" height="5" class="pin"/><rect x="492" y="474" width="5" height="5" class="pin"/><rect x="504" y="415" width="5" height="5" class="pin"/><rect x="504" y="474" width="5" height="5" class="pin"/><rect x="516" y="415" width="5" height="5" class="pin"/><rect x="516" y="474" width="5" height="5" class="pin"/><rect x="528" y="415" width="5" height="5" class="pin"/><rect x="528" y="474" width="5" height="5" class="pin"/><rect x="540" y="415" width="5" height="5" class="pin"/><rect x="540" y="474" width="5" height="5" class="pin"/><rect x="552" y="415" width="5" height="5" class="pin"/><rect x="552" y="474" width="5" height="5" class="pin"/><rect x="564" y="415" width="5" height="5" class="pin"/><rect x="564" y="474" width="5" height="5" class="pin"/><rect x="470" y="420" width="110" height="54" rx="3" class="pkg"/><text x="525" y="451" class="lbl">RENESAS</text>
+<rect x="180" y="415" width="5" height="5" class="pin"/><rect x="180" y="474" width="5" height="5" class="pin"/><rect x="192" y="415" width="5" height="5" class="pin"/><rect x="192" y="474" width="5" height="5" class="pin"/><rect x="204" y="415" width="5" height="5" class="pin"/><rect x="204" y="474" width="5" height="5" class="pin"/><rect x="216" y="415" width="5" height="5" class="pin"/><rect x="216" y="474" width="5" height="5" class="pin"/><rect x="228" y="415" width="5" height="5" class="pin"/><rect x="228" y="474" width="5" height="5" class="pin"/><rect x="240" y="415" width="5" height="5" class="pin"/><rect x="240" y="474" width="5" height="5" class="pin"/><rect x="252" y="415" width="5" height="5" class="pin"/><rect x="252" y="474" width="5" height="5" class="pin"/><rect x="264" y="415" width="5" height="5" class="pin"/><rect x="264" y="474" width="5" height="5" class="pin"/><rect x="170" y="420" width="110" height="54" rx="3" class="pkg"/><text x="225" y="451" class="lbl">SIFIVE</text>
+<rect x="50" y="315" width="5" height="5" class="pin"/><rect x="50" y="374" width="5" height="5" class="pin"/><rect x="62" y="315" width="5" height="5" class="pin"/><rect x="62" y="374" width="5" height="5" class="pin"/><rect x="74" y="315" width="5" height="5" class="pin"/><rect x="74" y="374" width="5" height="5" class="pin"/><rect x="86" y="315" width="5" height="5" class="pin"/><rect x="86" y="374" width="5" height="5" class="pin"/><rect x="98" y="315" width="5" height="5" class="pin"/><rect x="98" y="374" width="5" height="5" class="pin"/><rect x="110" y="315" width="5" height="5" class="pin"/><rect x="110" y="374" width="5" height="5" class="pin"/><rect x="122" y="315" width="5" height="5" class="pin"/><rect x="122" y="374" width="5" height="5" class="pin"/><rect x="134" y="315" width="5" height="5" class="pin"/><rect x="134" y="374" width="5" height="5" class="pin"/><rect x="40" y="320" width="110" height="54" rx="3" class="pkg"/><text x="95" y="351" class="lbl">ZEPHYR</text>
+<rect x="50" y="145" width="5" height="5" class="pin"/><rect x="50" y="204" width="5" height="5" class="pin"/><rect x="62" y="145" width="5" height="5" class="pin"/><rect x="62" y="204" width="5" height="5" class="pin"/><rect x="74" y="145" width="5" height="5" class="pin"/><rect x="74" y="204" width="5" height="5" class="pin"/><rect x="86" y="145" width="5" height="5" class="pin"/><rect x="86" y="204" width="5" height="5" class="pin"/><rect x="98" y="145" width="5" height="5" class="pin"/><rect x="98" y="204" width="5" height="5" class="pin"/><rect x="110" y="145" width="5" height="5" class="pin"/><rect x="110" y="204" width="5" height="5" class="pin"/><rect x="122" y="145" width="5" height="5" class="pin"/><rect x="122" y="204" width="5" height="5" class="pin"/><rect x="134" y="145" width="5" height="5" class="pin"/><rect x="134" y="204" width="5" height="5" class="pin"/><rect x="40" y="150" width="110" height="54" rx="3" class="pkg"/><text x="95" y="181" class="lbl">RISC-V</text>
+<rect x="300" y="185" width="120" height="120" rx="6" class="core"/><polygon points="384.2,259.0 360.0,273.0 335.8,259.0 335.8,231.0 360.0,217.0 384.2,231.0" class="hex"/>
+<circle cx="215" cy="160" r="4" class="pulse"/><circle cx="215" cy="160" r="12" class="pulse-ring"/>
+<circle cx="420" cy="330" r="4" class="pulse"/><circle cx="420" cy="330" r="12" class="pulse-ring"/>
+<circle cx="95" cy="245" r="4" class="pulse"/><circle cx="95" cy="245" r="12" class="pulse-ring"/></svg></div></section>
+<div style="height:60px"></div></body></html>
